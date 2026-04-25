@@ -1,420 +1,169 @@
-<header style="
-    background: #ffffff; 
-    padding: 20px 40px; 
-    width: 100%; 
-    box-sizing: border-box;
-">
-    <a href="https://nakajimakan14550.github.io/home/" style="display: inline-block; text-decoration: none;">
-        <img src="logo.png" alt="CHRONIX" style="height: 45px; width: auto; display: block; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">
-    </a>
-</header>
-
-<section style="padding: 100px 20px; background: #ffffff; font-family: 'Noto Sans JP', sans-serif;">
-    <div style="max-width: 1100px; margin: 0 auto;">
-        
-        <div style="margin-bottom: 60px;">
-            <h2 style="color: #0d4d4d; border-left: 8px solid #d4af37; padding-left: 20px; font-size: 32px; font-weight: 700; letter-spacing: 0.05em;">
-                1. 赤外線センサーの原理
-            </h2>
-        </div>
-
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>イメージセンサー：光をデジタル数値へ変換する核心技術</title>
+    <title>イメージセンサーの原理と種類 | CHRONIX</title>
     <style>
-        :root {
-            --bg-color: #030712;
-            --panel-bg: #111827;
-            --accent-sensor: #6366f1; /* センサー：インディゴ */
-            --accent-infra: #ef4444;  /* 赤外線：レッド */
-            --text-main: #f9fafb;
-            --text-dim: #9ca3af;
-            --border: #1f2937;
-        }
-
+        /* 基本スタイル：白背景と黒字 */
         body {
-            font-family: 'Inter', 'Hiragino Kaku Gothic ProN', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
             margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-        }
-
-        .container { max-width: 1400px; margin: 0 auto; }
-
-        header {
-            text-align: center;
-            padding: 50px 0;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 40px;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin: 0;
-            background: linear-gradient(90deg, var(--accent-sensor), #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* 1カラムの大きなセクション（原理） */
-        .hero-section {
-            background: var(--panel-bg);
-            border-radius: 24px;
-            border: 1px solid var(--border);
-            padding: 40px;
-            margin-bottom: 40px;
-            display: flex;
-            align-items: center;
-            gap: 40px;
-        }
-
-        .hero-section img {
-            width: 50%;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
-        }
-
-        /* 2カラムセクション（比較） */
-        .split-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .card {
-            background: var(--panel-bg);
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-        }
-
-        .card-header {
-            padding: 20px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-img {
-            width: 100%;
-            display: block;
-            background: #000;
-        }
-
-        .content { padding: 25px; }
-
-        .logic-list {
-            list-style: none;
             padding: 0;
-        }
-
-        .logic-list li {
-            margin-bottom: 15px;
-            padding-left: 20px;
-            position: relative;
-            font-size: 0.95rem;
-        }
-
-        .logic-list li::before {
-            content: "◆";
-            position: absolute;
-            left: 0;
-            color: var(--accent-sensor);
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            background: rgba(99, 102, 241, 0.2);
-            color: var(--accent-sensor);
-            margin-bottom: 10px;
-        }
-
-        @media (max-width: 1000px) {
-            .hero-section { flex-direction: column; }
-            .hero-section img { width: 100%; }
-            .split-grid { grid-template-columns: 1fr; }
-        }
-    </style>
-</head>
-<body>
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>イメージセンサーの仕組みと原理</title>
-    <style>
-        :root {
-            --bg-color: #0a0c14;
-            --panel-bg: #161b2a;
-            --accent-color: #4f46e5;
-            --infra-color: #dc2626;
-            --text-main: #f3f4f6;
-            --text-sub: #9ca3af;
-            --border: #2d3748;
-        }
-
-        body {
-            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.7;
-        }
-
-        .container { max-width: 1100px; margin: 0 auto; }
-
-        header {
-            text-align: center;
-            padding: 60px 0;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 50px;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin: 0;
-            color: #ffffff;
-            letter-spacing: 0.05em;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            border-left: 6px solid var(--accent-color);
-            padding-left: 20px;
-            margin: 60px 0 30px;
-            color: #ffffff;
-        }
-
-        /* 画像エリア */
-        .image-box {
-            background: #000;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            margin-bottom: 25px;
-        }
-
-        .image-box img {
-            width: 100%;
-            display: block;
-        }
-
-        /* 説明テキストエリア */
-        .desc-text {
-            background: var(--panel-bg);
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 40px;
-            border-left: 4px solid var(--accent-color);
-        }
-
-        /* テーブルスタイル */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 30px 0;
-            background: var(--panel-bg);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        th, td {
-            padding: 18px;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        th {
-            background-color: rgba(79, 70, 229, 0.1);
-            color: var(--accent-color);
-            font-weight: bold;
-            width: 30%;
-        }
-
-        .highlight-red { color: var(--infra-color); }
-        .info-tag {
-            display: inline-block;
-            background: #2563eb;
-            color: white;
-            padding: 2px 10px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>イメージセンサーの仕組みと原理 - 大型テキスト版</title>
-    <style>
-        :root {
-            --bg-color: #0a0c14;
-            --panel-bg: #161b2a;
-            --accent-color: #4f46e5;
-            --infra-color: #dc2626;
-            --text-main: #f3f4f6;
-            --text-sub: #9ca3af;
-            --border: #2d3748;
-        }
-
-        body {
-            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 30px;
-            /* 全体のベースフォントサイズを大きく */
-            font-size: 20px;
             line-height: 1.8;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; }
-
-        header {
-            text-align: center;
-            padding: 80px 0;
-            border-bottom: 2px solid var(--border);
-            margin-bottom: 60px;
+        /* ロゴヘッダー（拡大版） */
+        header.site-header {
+            background: #ffffff;
+            padding: 30px 40px; 
+            width: 100%;
+            box-sizing: border-box;
+            border-bottom: 1px solid #eaeaea;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        header h1 {
-            font-size: 3.5rem; /* タイトルを巨大化 */
-            margin: 0;
-            color: #ffffff;
-            letter-spacing: 0.05em;
-            font-weight: 800;
+        header.site-header img {
+            height: 70px; /* 45pxから70pxへ大幅拡大 */
+            width: auto;
+            display: block;
+            transition: opacity 0.3s ease;
         }
 
-        header p {
-            font-size: 1.5rem;
-            margin-top: 20px;
+        header.site-header img:hover {
+            opacity: 0.7;
         }
 
-        .section-title {
-            font-size: 2.5rem; /* セクション見出しを大きく */
-            border-left: 10px solid var(--accent-color);
+        /* コンテンツコンテナ */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px 100px;
+        }
+
+        /* セクションタイトル：完全な黒字、ゴールドのアクセントバー */
+        .step-title {
+            color: #000000; /* 完全に黒字に変更 */
+            border-left: 10px solid #d4af37; /* CHRONIXゴールド */
             padding-left: 25px;
+            font-size: 38px; /* 大型サイズ */
+            font-weight: 800;
+            letter-spacing: 0.05em;
             margin: 80px 0 40px;
-            color: #ffffff;
-            font-weight: 700;
+            line-height: 1.2;
         }
 
-        /* 画像エリア */
-        .image-box {
-            background: #000;
+        /* 画像ボックス：視認性を高める影と枠線 */
+        .image-frame {
+            background: #000000;
             border-radius: 20px;
             overflow: hidden;
-            border: 2px solid var(--border);
-            margin-bottom: 35px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border: 1px solid #ddd;
         }
 
-        .image-box img {
+        .image-frame img {
             width: 100%;
             display: block;
         }
 
-        /* 説明テキストエリア */
-        .desc-text {
-            background: var(--panel-bg);
-            padding: 40px;
+        /* 解説テキストボックス：大型テキスト */
+        .desc-box {
+            background: #fbfbfb;
+            padding: 45px;
             border-radius: 16px;
-            margin-bottom: 60px;
-            border-left: 6px solid var(--accent-color);
-            font-size: 1.3rem; /* 本文テキストを大きく */
+            border-left: 6px solid #4f46e5; /* 補色系のアクセント */
+            font-size: 1.35rem;
+            margin-bottom: 80px;
+            color: #1a1a1a;
         }
 
-        /* テーブルスタイル */
-        table {
+        .info-tag {
+            display: inline-block;
+            background: #000000;
+            color: #ffffff;
+            padding: 6px 18px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* 比較テーブル：ビジネス・エンジニアリング仕様 */
+        .comparison-table {
             width: 100%;
             border-collapse: collapse;
             margin: 40px 0;
-            background: var(--panel-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            font-size: 1.2rem; /* 表内の文字を大きく */
+            background: #ffffff;
+            font-size: 1.2rem;
+            border: 1px solid #eee;
         }
 
-        th, td {
+        .comparison-table th, .comparison-table td {
             padding: 25px;
             text-align: left;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid #eee;
+            color: #000;
         }
 
-        th {
-            background-color: rgba(79, 70, 229, 0.15);
-            color: var(--accent-color);
+        .comparison-table th {
+            background-color: #f8f8f8;
+            color: #4f46e5;
             font-weight: bold;
             width: 35%;
         }
 
-        .highlight-red { color: var(--infra-color); }
-        
-        .info-tag {
-            display: inline-block;
-            background: #2563eb;
-            color: white;
-            padding: 5px 18px;
-            border-radius: 6px;
-            font-size: 1rem;
+        .highlight-bold {
             font-weight: bold;
-            margin-bottom: 15px;
+            color: #4f46e5;
         }
 
-        /* スマホ対応 */
         @media (max-width: 768px) {
-            header h1 { font-size: 2.2rem; }
-            .section-title { font-size: 1.8rem; }
-            th { width: 40%; }
+            header.site-header { padding: 20px; }
+            header.site-header img { height: 50px; }
+            .step-title { font-size: 28px; }
+            .desc-box { padding: 30px; font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>イメージセンサーの原理と種類</h1>
-        <p style="color: var(--text-sub);">光を電気信号に変える物理プロセスと選定基準</p>
-    </header>
+<header class="site-header">
+    <a href="https://nakajimakan14550.github.io/home/">
+        <img src="logo.png" alt="CHRONIX">
+    </a>
+</header>
 
-    <h2 class="section-title">1. 光電変換の仕組み</h2>
-    <div class="image-box">
+<div class="container">
+    
+    <h2 class="step-title">1. 光電変換の仕組み</h2>
+    <div class="image-frame">
         <img src="denshi.png" alt="光電変換の仕組み">
     </div>
-    <div class="desc-text">
+    <div class="desc-box">
         <span class="info-tag">物理原理：光電効果</span>
-        <p>センサーの各画素（フォトダイオード）は、光子を受け取ると電子を放出します。この放出された電子を<b>「バケツ」</b>に溜め、その量を電圧として読み取ることで、光の強弱をデジタル数値に変換します。バケツが大きく、ノイズが少ないほど、繊細な階調表現が可能になります。</p>
+        <p>
+            イメージセンサーの各画素（フォトダイオード）は、光子を受け取ると電子を放出します。
+            この放出された電子を<b>「バケツ」</b>に溜め、その量を電圧として読み取ることで、光の強弱を正確なデジタル数値に変換します。
+            バケツが大きく、ノイズを極限まで抑え込むことが、高精度な画像認識の第一歩となります。
+        </p>
     </div>
 
-    <h2 class="section-title">2. 代表的なセンサー方式の比較</h2>
-    <div class="image-box">
+    <h2 class="step-title">2. 代表的なセンサー方式の比較</h2>
+    <div class="image-frame">
         <img src="cmos.png" alt="CMOS vs CCD">
     </div>
-    <div class="desc-text">
-        <p>現在、多くの機器で採用されているのは高速な<b>CMOS方式</b>です。一方で、画質の均一性を極限まで追求する用途では<b>CCD方式</b>が選ばれることもあります。</p>
-        <table>
+    <div class="desc-box">
+        <p>
+            現在、産業用カメラの主流は高速・低消費電力な<b>CMOS方式</b>です。
+            一方、画質の均一性や科学的な精密測定が求められる特殊な用途では、電荷をリレー形式で転送する<b>CCD方式</b>が依然として選ばれることもあります。
+        </p>
+        <table class="comparison-table">
             <tr>
                 <th>項目</th>
                 <td>CMOSセンサー（主流）</td>
@@ -423,11 +172,11 @@
             <tr>
                 <th>読み出し原理</th>
                 <td>画素ごとに回路があり、高速に読み出す</td>
-                <td>バケツリレーのように電荷を転送し、1箇所で読み出す</td>
+                <td>電荷をリレー形式で転送し、1箇所で増幅</td>
             </tr>
             <tr>
                 <th>読み出し速度</th>
-                <td style="font-weight:bold; color:#fff;">非常に速い</td>
+                <td class="highlight-bold">非常に速い</td>
                 <td>比較的遅い</td>
             </tr>
             <tr>
@@ -443,41 +192,40 @@
         </table>
     </div>
 
-    <h2 class="section-title">3. 赤外線センサー：冷却型と非冷却型</h2>
-    <div class="image-box">
+    <h2 class="step-title">3. 赤外線センサー：冷却型と非冷却型</h2>
+    <div class="image-frame">
         <img src="cool.png" alt="赤外線センサーの比較">
     </div>
-    <div class="desc-text" style="border-left-color: var(--infra-color);">
-        <span class="info-tag" style="background: var(--infra-color);">熱検知のメカニズム</span>
-        <p>目に見えない「熱」を捉えるには、温度上昇を測る方法（熱型）と、光子を直接数える方法（量子型）があります。用途に応じた精度の使い分けが重要です。</p>
-        <table>
+    <div class="desc-box" style="border-left-color: #dc2626;">
+        <span class="info-tag" style="background: #dc2626;">熱検知のメカニズム</span>
+        <p>
+            目に見えない「熱（遠赤外線）」を捉えるには、温度上昇による抵抗変化を測る方法（熱型）と、光子を直接電子に変換する方法（量子型）があります。
+            用途に応じた精度の使い分けが重要です。
+        </p>
+        <table class="comparison-table">
             <tr>
-                <th class="highlight-red">種類</th>
-                <td class="highlight-red" style="font-weight:bold;">非冷却型（マイクロボロメータ）</td>
-                <td class="highlight-red" style="font-weight:bold;">冷却型（量子型）</td>
+                <th style="color:#dc2626;">種類</th>
+                <td style="font-weight:bold;">非冷却型（マイクロボロメータ）</td>
+                <td style="font-weight:bold;">冷却型（量子型）</td>
             </tr>
             <tr>
                 <th>測定原理</th>
                 <td><b>熱型：</b>赤外線による受熱体の「温度上昇」を測る</td>
-                <td><b>量子型：</b>赤外線の「光子」が電子を叩き出す現象を測る</td>
+                <td><b>量子型：</b>赤外線の「光子」が電子を叩き出す</td>
             </tr>
             <tr>
                 <th>冷却の有無</th>
                 <td>不要（常温で動作）</td>
-                <td style="font-weight:bold; color:#fff;">必要（-200℃近くまで冷やす）</td>
+                <td class="highlight-bold">必要（-200℃近くまで冷やす）</td>
             </tr>
             <tr>
                 <th>感度・速度</th>
-                <td>中程度（反応に少し時間がかかる）</td>
-                <td style="font-weight:bold; color:#fff;">極めて高い（瞬時に微細な差を検知）</td>
-            </tr>
-            <tr>
-                <th>主な用途</th>
-                <td>防犯カメラ、体温計、建物診断</td>
-                <td>宇宙観測、高速移動体解析、ガス漏れ検知</td>
+                <td>中程度（定常的な熱監視に最適）</td>
+                <td class="highlight-bold">極めて高い（瞬時に微細な差を検知）</td>
             </tr>
         </table>
     </div>
+
 </div>
 
 </body>
