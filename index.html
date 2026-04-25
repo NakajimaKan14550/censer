@@ -589,3 +589,191 @@
 
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可視光からマルチスペクトルへ：物質特定への進化 | CHRONIX</title>
+    <style>
+        /* CHRONIX 公式スタイル：視認性最優先の白背景・黒字 */
+        body {
+            font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        /* 拡大ロゴヘッダー */
+        header.site-header {
+            background: #ffffff;
+            padding: 30px 40px;
+            width: 100%;
+            box-sizing: border-box;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        header.site-header img {
+            height: 70px;
+            width: auto;
+            display: block;
+        }
+
+        /* メインコンテナ */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* セクションタイトル：特大の黒字、ゴールドアクセント */
+        .step-title {
+            color: #000000;
+            border-left: 10px solid #d4af37;
+            padding-left: 25px;
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            margin: 80px 0 40px;
+            line-height: 1.2;
+        }
+
+        /* 画像ボックス：kashi.png */
+        .image-frame {
+            background: #000000;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            border: 1px solid #ddd;
+        }
+
+        .image-frame img {
+            width: 100%;
+            display: block;
+        }
+
+        /* 特大解説カード */
+        .info-card {
+            background: #fbfbfb;
+            padding: 50px;
+            border-radius: 20px;
+            border-left: 8px solid #0d4d4d;
+            font-size: 1.5rem; /* 特大サイズ */
+            margin-bottom: 80px;
+            color: #1a1a1a;
+        }
+
+        .card-tag {
+            display: inline-block;
+            background: #0d4d4d;
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        /* 比較テーブル：大型・黒字 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            background: #ffffff;
+            font-size: 1.3rem;
+            border: 2px solid #eee;
+        }
+
+        .data-table th, .data-table td {
+            padding: 25px;
+            text-align: left;
+            border-bottom: 2px solid #eee;
+            color: #000;
+        }
+
+        .data-table th {
+            background-color: #f8f8f8;
+            color: #0d4d4d;
+            font-weight: bold;
+            width: 35%;
+            border-right: 2px solid #eee;
+        }
+
+        .highlight-accent {
+            font-weight: bold;
+            color: #c2410c;
+        }
+
+        @media (max-width: 768px) {
+            .step-title { font-size: 30px; }
+            .info-card { padding: 30px; font-size: 1.2rem; }
+            .data-table { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="https://nakajimakan14550.github.io/home/">
+        <img src="logo.png" alt="CHRONIX">
+    </a>
+</header>
+
+<div class="container">
+    
+    <h2 class="step-title">6. 可視光からマルチスペクトルへ：物質特定への進化</h2>
+
+    <div class="image-frame">
+        <img src="kashi.png" alt="可視光センサーとマルチスペクトルカメラの比較">
+    </div>
+
+    <div class="info-card">
+        <span class="card-tag">CONVERT（ステップ2）：物理特性の数値化</span>
+        <p>
+            可視光センサーは、人間の「目」をデジタル化し、見たままの世界を再現する自動化の第一歩です。しかし、人員削減を極めるDXの現場では、<b>「見た目が似ているが材質が違うもの」</b>を判別する壁に直面します。
+        </p>
+        <p>
+            そこで登場するのがマルチスペクトルカメラです。RGBの3色を超えた波長分割と近赤外線（NIR）の活用により、物質固有の「光の指紋（スペクトル）」を数値化し、人知を超えた精度での物質特定を実現します。
+        </p>
+
+        <table class="data-table">
+            <tr>
+                <th>比較項目</th>
+                <td>可視光センサー (VIS)</td>
+                <td>マルチスペクトルカメラ</td>
+            </tr>
+            <tr>
+                <th>バンド数</th>
+                <td>3 (R, G, B)</td>
+                <td class="highlight-accent">5 ～ 10バンド以上</td>
+            </tr>
+            <tr>
+                <th>主な原理</th>
+                <td>ベイヤー配列による色の再現</td>
+                <td class="highlight-accent">分光フィルタによる反射パターンの数値化</td>
+            </tr>
+            <tr>
+                <th>見えるもの</th>
+                <td>人間の目に見える範囲の色・形</td>
+                <td class="highlight-accent">物質の材質・鮮度・内部の異物</td>
+            </tr>
+            <tr>
+                <th>DXにおける価値</th>
+                <td>標準的な目視検査の自動化</td>
+                <td class="highlight-accent">誤判定ゼロの究極の無人ライン構築</td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="text-align: center; color: #666; font-size: 1.1rem; border-top: 1px solid #eee; padding-top: 40px;">
+        <p>「見た目の模倣」から「物理データの解析」へ。センサーの進化がDXの質を変える。</p>
+    </div>
+
+</div>
+
+</body>
+</html>
