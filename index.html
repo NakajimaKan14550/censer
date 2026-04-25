@@ -411,3 +411,189 @@
 
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>波長別：センサー構造の決定的な違い | CHRONIX</title>
+    <style>
+        /* CHRONIX 公式スタイル：白背景・黒字・ゴールド */
+        body {
+            font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        /* 拡大ロゴヘッダー */
+        header.site-header {
+            background: #ffffff;
+            padding: 30px 40px;
+            width: 100%;
+            box-sizing: border-box;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        header.site-header img {
+            height: 70px;
+            width: auto;
+            display: block;
+        }
+
+        /* コンテンツコンテナ */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* セクションタイトル：完全な黒字、ゴールドのアクセントバー */
+        .step-title {
+            color: #000000;
+            border-left: 10px solid #d4af37;
+            padding-left: 25px;
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            margin: 80px 0 40px;
+            line-height: 1.2;
+        }
+
+        /* 画像ボックス：uv.png */
+        .image-frame {
+            background: #000000;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            border: 1px solid #ddd;
+        }
+
+        .image-frame img {
+            width: 100%;
+            display: block;
+        }
+
+        /* 特大解説カード */
+        .structure-card {
+            background: #fbfbfb;
+            padding: 50px;
+            border-radius: 20px;
+            border-left: 8px solid #4f46e5;
+            font-size: 1.5rem;
+            margin-bottom: 80px;
+            color: #1a1a1a;
+        }
+
+        .structure-tag {
+            display: inline-block;
+            background: #4f46e5;
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        /* 構造比較テーブル：大型・黒字 */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            background: #ffffff;
+            font-size: 1.3rem;
+            border: 2px solid #eee;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 25px;
+            text-align: left;
+            border-bottom: 2px solid #eee;
+            color: #000;
+        }
+
+        .comparison-table th {
+            background-color: #f8f8f8;
+            color: #4f46e5;
+            font-weight: bold;
+            width: 35%;
+            border-right: 2px solid #eee;
+        }
+
+        .highlight-bold {
+            font-weight: bold;
+            color: #000000;
+        }
+
+        @media (max-width: 768px) {
+            .step-title { font-size: 30px; }
+            .structure-card { padding: 30px; font-size: 1.2rem; }
+            .comparison-table { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="https://nakajimakan14550.github.io/home/">
+        <img src="logo.png" alt="CHRONIX">
+    </a>
+</header>
+
+<div class="container">
+    
+    <h2 class="step-title">5. 波長別：センサー構造と窓材の決定的な違い</h2>
+
+    <div class="image-frame">
+        <img src="uv.png" alt="短波長センサーと赤外線センサーの構造比較">
+    </div>
+
+    <div class="structure-card">
+        <span class="structure-tag">物理レイヤーの最適化：入り口の設計</span>
+        <p>
+            センサーの基本原理は共通ですが、波長特性に合わせて<b>「窓材（カバーガラス）」</b>と<b>「受光部の向き」</b>を物理的に変更する必要があります。
+            特に、短波長（UV）を通さない普通のガラスや、赤外線を遮断する配線層を回避する設計が、判定精度の最大化に直結します。
+        </p>
+
+        <table class="comparison-table">
+            <tr>
+                <th>比較項目</th>
+                <td>短波長 (UV/X線) センサー</td>
+                <td>赤外線 (IR) センサー</td>
+            </tr>
+            <tr>
+                <th>受光方式</th>
+                <td class="highlight-bold">裏面照射型 (BSI)</td>
+                <td>表面 / 裏面照射型</td>
+            </tr>
+            <tr>
+                <th>窓（カバーガラス）</th>
+                <td class="highlight-bold">石英 / サファイア</td>
+                <td class="highlight-bold">ゲルマニウム / シリコン</td>
+            </tr>
+            <tr>
+                <th>冷却の主な目的</th>
+                <td>超微弱光の検出・ダメージ耐性</td>
+                <td>自己熱ノイズの削減</td>
+            </tr>
+            <tr>
+                <th>物理的強み</th>
+                <td>表面キズ・内部構造の可視化</td>
+                <td>温度・透過・夜間の絶対判定</td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="text-align: center; color: #666; font-size: 1.1rem; border-top: 1px solid #eee; padding-top: 40px;">
+        <p>「入り口」の物理的な整合性が、AI判定のロバスト性を担保する。</p>
+    </div>
+
+</div>
+
+</body>
+</html>
