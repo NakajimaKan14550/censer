@@ -963,3 +963,231 @@
 </html>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>波長別センサー選定・完全ガイド | CHRONIX</title>
+    <style>
+        /* CHRONIX 公式トーン：白背景・黒字・ゴールド */
+        body {
+            font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        /* 拡大ロゴヘッダー */
+        header.site-header {
+            background: #ffffff;
+            padding: 30px 40px;
+            width: 100%;
+            box-sizing: border-box;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        header.site-header img {
+            height: 70px;
+            width: auto;
+            display: block;
+        }
+
+        /* メinコンテナ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* 総まとめタイトル：巨大黒字、ゴールドアクセント */
+        .master-title {
+            color: #000000;
+            border-left: 12px solid #d4af37;
+            padding-left: 30px;
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            margin: 80px 0 50px;
+            line-height: 1.1;
+        }
+
+        /* 究極の選定テーブル */
+        .master-table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 80px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border-radius: 20px;
+        }
+
+        .master-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            font-size: 1.25rem; /* テキスト特大 */
+            min-width: 900px;
+        }
+
+        .master-table th {
+            background-color: #0d4d4d;
+            color: #ffffff;
+            padding: 25px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #0d4d4d;
+        }
+
+        .master-table td {
+            padding: 25px;
+            border: 1px solid #eee;
+            vertical-align: top;
+            color: #1a1a1a;
+        }
+
+        .master-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* 波長区分の強調カラー */
+        .wavelength-label {
+            font-weight: 900;
+            color: #000;
+            display: block;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        /* 選定の黄金律カード */
+        .golden-rule-section {
+            background: #000000;
+            color: #ffffff;
+            padding: 60px;
+            border-radius: 30px;
+            margin-top: 100px;
+        }
+
+        .golden-rule-section h3 {
+            color: #d4af37;
+            font-size: 32px;
+            margin-top: 0;
+            border-bottom: 2px solid #d4af37;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+
+        .rule-item {
+            margin-bottom: 40px;
+        }
+
+        .rule-item h4 {
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .rule-item p {
+            font-size: 1.4rem;
+            color: #cccccc;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .master-title { font-size: 32px; }
+            .master-table { font-size: 1rem; }
+            .golden-rule-section { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="https://nakajimakan14550.github.io/home/">
+        <img src="logo.png" alt="CHRONIX">
+    </a>
+</header>
+
+<div class="container">
+    
+    <h2 class="master-title">波長別：センサー選定・完全ガイド</h2>
+
+    <div class="master-table-wrapper">
+        <table class="master-table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">波長区分</th>
+                    <th style="width: 25%;">代表的センサー</th>
+                    <th style="width: 25%;">物理的強み</th>
+                    <th style="width: 30%;">人員削減DXでの例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="wavelength-label">短波長 (UV/X線)</span></td>
+                    <td>裏面照射型CMOS<br>FPD (X線用)</td>
+                    <td>表面の微細構造・内部透過</td>
+                    <td>透明フィルムのキズ検査<br>鋳物の内部空洞検知</td>
+                </tr>
+                <tr>
+                    <td><span class="wavelength-label">可視光 (VIS)</span></td>
+                    <td>一般CMOS (ベイヤー)</td>
+                    <td>形状・色・標準外観</td>
+                    <td>梱包状態のチェック<br>目視作業の自動化</td>
+                </tr>
+                <tr>
+                    <td><span class="wavelength-label">マルチスペクトル</span></td>
+                    <td>分光フィルタ型CMOS</td>
+                    <td>物質の特定 (光の指紋)</td>
+                    <td>樹脂と異物の100%選別<br>食品の鮮度・糖度の数値化</td>
+                </tr>
+                <tr>
+                    <td><span class="wavelength-label">近赤外 (NIR/SWIR)</span></td>
+                    <td>InGaAsセンサー</td>
+                    <td>透過・水分吸収・夜間</td>
+                    <td>基板越しの配線検査<br>不透明容器の液面判定</td>
+                </tr>
+                <tr>
+                    <td><span class="wavelength-label">遠赤外 (LWIR)</span></td>
+                    <td>マイクロボロメータ</td>
+                    <td>熱エネルギー (温度)</td>
+                    <td>軸受の異常発熱検知<br>暗闇での侵入監視</td>
+                </tr>
+                <tr>
+                    <td><span class="wavelength-label">テラヘルツ / ミリ波</span></td>
+                    <td>THz検出器 / レーダー</td>
+                    <td>遮蔽物の透過・距離</td>
+                    <td>ダンボール内の検品<br>搬送ロボの自律走行</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="golden-rule-section">
+        <h3>中島流：センサー選定の黄金律</h3>
+        
+        <div class="rule-item">
+            <h4>1. 「物理的な情報不足」をAIで補わない</h4>
+            <p>可視光で誤判定が続くなら、AIの調整ではなく波長の変更を検討すべき。物理レイヤーで「コントラスト」を作るのが最短ルートです。</p>
+        </div>
+
+        <div class="rule-item">
+            <h4>2. 窓材（カバーガラス）の整合性</h4>
+            <p>短波長は「石英」、長波長は「ゲルマニウム」。センサー能力を殺さない「入り口」の設計が、システム全体の寿命を決めます。</p>
+        </div>
+
+        <div class="rule-item">
+            <h4>3. 冷却は「判定の安定性」への投資</h4>
+            <p>冷却型によるノイズ削減は、誤判定による人員介入コストをゼロにするための、最も効率的な投資となります。</p>
+        </div>
+    </div>
+
+    <div style="text-align: center; color: #666; font-size: 1.1rem; border-top: 1px solid #eee; padding-top: 60px; margin-top: 60px;">
+        <p>全波長を制する者が、人員削減DXの物理レイヤーを制する。</p>
+    </div>
+
+</div>
+
+</body>
+</html>
