@@ -260,6 +260,137 @@
         }
     </style>
 </head>
+
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イメージセンサーの仕組みと原理 - 大型テキスト版</title>
+    <style>
+        :root {
+            --bg-color: #0a0c14;
+            --panel-bg: #161b2a;
+            --accent-color: #4f46e5;
+            --infra-color: #dc2626;
+            --text-main: #f3f4f6;
+            --text-sub: #9ca3af;
+            --border: #2d3748;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 30px;
+            /* 全体のベースフォントサイズを大きく */
+            font-size: 20px;
+            line-height: 1.8;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            padding: 80px 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 60px;
+        }
+
+        header h1 {
+            font-size: 3.5rem; /* タイトルを巨大化 */
+            margin: 0;
+            color: #ffffff;
+            letter-spacing: 0.05em;
+            font-weight: 800;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem; /* セクション見出しを大きく */
+            border-left: 10px solid var(--accent-color);
+            padding-left: 25px;
+            margin: 80px 0 40px;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* 画像エリア */
+        .image-box {
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--border);
+            margin-bottom: 35px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+        }
+
+        .image-box img {
+            width: 100%;
+            display: block;
+        }
+
+        /* 説明テキストエリア */
+        .desc-text {
+            background: var(--panel-bg);
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 60px;
+            border-left: 6px solid var(--accent-color);
+            font-size: 1.3rem; /* 本文テキストを大きく */
+        }
+
+        /* テーブルスタイル */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            background: var(--panel-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            font-size: 1.2rem; /* 表内の文字を大きく */
+        }
+
+        th, td {
+            padding: 25px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: rgba(79, 70, 229, 0.15);
+            color: var(--accent-color);
+            font-weight: bold;
+            width: 35%;
+        }
+
+        .highlight-red { color: var(--infra-color); }
+        
+        .info-tag {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 5px 18px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* スマホ対応 */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .section-title { font-size: 1.8rem; }
+            th { width: 40%; }
+        }
+    </style>
+</head>
 <body>
 
 <div class="container">
@@ -274,7 +405,7 @@
     </div>
     <div class="desc-text">
         <span class="info-tag">物理原理：光電効果</span>
-        <p>センサーの各画素（フォトダイオード）は、光子を受け取ると電子を放出します。この放出された電子を「バケツ」に溜め、その量を電圧として読み取ることで、光の強弱をデジタル数値に変換します。バケツが大きく、ノイズが少ないほど、繊細な階調表現が可能になります。</p>
+        <p>センサーの各画素（フォトダイオード）は、光子を受け取ると電子を放出します。この放出された電子を<b>「バケツ」</b>に溜め、その量を電圧として読み取ることで、光の強弱をデジタル数値に変換します。バケツが大きく、ノイズが少ないほど、繊細な階調表現が可能になります。</p>
     </div>
 
     <h2 class="section-title">2. 代表的なセンサー方式の比較</h2>
@@ -282,7 +413,7 @@
         <img src="cmos.png" alt="CMOS vs CCD">
     </div>
     <div class="desc-text">
-        <p>現在、多くの機器で採用されているのは高速なCMOS方式です。一方で、画質の均一性を極限まで追求する用途ではCCD方式が選ばれることもあります。</p>
+        <p>現在、多くの機器で採用されているのは高速な<b>CMOS方式</b>です。一方で、画質の均一性を極限まで追求する用途では<b>CCD方式</b>が選ばれることもあります。</p>
         <table>
             <tr>
                 <th>項目</th>
@@ -295,8 +426,8 @@
                 <td>バケツリレーのように電荷を転送し、1箇所で読み出す</td>
             </tr>
             <tr>
-                <th>速度</th>
-                <td style="font-weight:bold;">非常に速い</td>
+                <th>読み出し速度</th>
+                <td style="font-weight:bold; color:#fff;">非常に速い</td>
                 <td>比較的遅い</td>
             </tr>
             <tr>
@@ -322,8 +453,8 @@
         <table>
             <tr>
                 <th class="highlight-red">種類</th>
-                <td class="highlight-red">非冷却型（マイクロボロメータ）</td>
-                <td class="highlight-red">冷却型（量子型）</td>
+                <td class="highlight-red" style="font-weight:bold;">非冷却型（マイクロボロメータ）</td>
+                <td class="highlight-red" style="font-weight:bold;">冷却型（量子型）</td>
             </tr>
             <tr>
                 <th>測定原理</th>
@@ -333,12 +464,12 @@
             <tr>
                 <th>冷却の有無</th>
                 <td>不要（常温で動作）</td>
-                <td style="font-weight:bold;">必要（-200℃近くまで冷やす）</td>
+                <td style="font-weight:bold; color:#fff;">必要（-200℃近くまで冷やす）</td>
             </tr>
             <tr>
                 <th>感度・速度</th>
                 <td>中程度（反応に少し時間がかかる）</td>
-                <td style="font-weight:bold;">極めて高い（瞬時に微細な差を検知）</td>
+                <td style="font-weight:bold; color:#fff;">極めて高い（瞬時に微細な差を検知）</td>
             </tr>
             <tr>
                 <th>主な用途</th>
