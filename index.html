@@ -152,59 +152,200 @@
 </head>
 <body>
 
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イメージセンサーの仕組みと原理</title>
+    <style>
+        :root {
+            --bg-color: #0a0c14;
+            --panel-bg: #161b2a;
+            --accent-color: #4f46e5;
+            --infra-color: #dc2626;
+            --text-main: #f3f4f6;
+            --text-sub: #9ca3af;
+            --border: #2d3748;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.7;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: #ffffff;
+            letter-spacing: 0.05em;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            border-left: 6px solid var(--accent-color);
+            padding-left: 20px;
+            margin: 60px 0 30px;
+            color: #ffffff;
+        }
+
+        /* 画像エリア */
+        .image-box {
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            margin-bottom: 25px;
+        }
+
+        .image-box img {
+            width: 100%;
+            display: block;
+        }
+
+        /* 説明テキストエリア */
+        .desc-text {
+            background: var(--panel-bg);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        /* テーブルスタイル */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: var(--panel-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--accent-color);
+            font-weight: bold;
+            width: 30%;
+        }
+
+        .highlight-red { color: var(--infra-color); }
+        .info-tag {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
 <div class="container">
     <header>
-        <h1>1. 赤外線センサーの原理</h1>
-        <p>物理的な光の粒子を、精密なデジタルデータへと昇華させる</p>
+        <h1>イメージセンサーの原理と種類</h1>
+        <p style="color: var(--text-sub);">光を電気信号に変える物理プロセスと選定基準</p>
     </header>
 
-    <div class="hero-section">
-        <img src="denshi.png" alt="光電変換の原理">
-        <div class="hero-text">
-            <div class="badge">Fundamental Principle</div>
-            <h2 style="color:var(--accent-sensor)">光電変換：光を「電子の数」として捉える</h2>
-            <p>イメージセンサーの各画素（ピクセル）は、光子を受け取り電子を放出する「光電効果」を利用した極小のバケツです。</p>
-            <ul class="logic-list">
-                <li><strong>電子の蓄積:</strong> 光が強いほどバケツに溜まる電子が増え、明るいデータとなる。</li>
-                <li><strong>ノイズの克服:</strong> DX自動化の成否は、この変換工程でいかに「熱ノイズ」を抑え、純粋な信号のみを抽出できるかにかかっている。</li>
-            </ul>
-        </div>
+    <h2 class="section-title">1. 光電変換の仕組み</h2>
+    <div class="image-box">
+        <img src="denshi.png" alt="光電変換の仕組み">
+    </div>
+    <div class="desc-text">
+        <span class="info-tag">物理原理：光電効果</span>
+        <p>センサーの各画素（フォトダイオード）は、光子を受け取ると電子を放出します。この放出された電子を「バケツ」に溜め、その量を電圧として読み取ることで、光の強弱をデジタル数値に変換します。バケツが大きく、ノイズが少ないほど、繊細な階調表現が可能になります。</p>
     </div>
 
-    <div class="split-grid">
-        <div class="card">
-            <div class="card-header">
-                <span style="color:var(--accent-sensor)">CMOS vs CCD：読み出し方式の進化</span>
-            </div>
-            <img src="cmos.png" alt="CMOSとCCDの比較" class="card-img">
-            <div class="content">
-                <ul class="logic-list">
-                    <li><strong>CMOS (主流):</strong> 画素ごとに信号を増幅。高速読み出しが可能で、グローバルシャッター等、産業用DXの基盤となる。</li>
-                    <li><strong>CCD (旧来):</strong> 電荷をリレー形式で転送。均一性は高いが、高速化と省電力化に課題がある。</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <span style="color:var(--accent-infra)">冷却型 vs 非冷却型：不可視の熱を撮る</span>
-            </div>
-            <img src="cool.png" alt="赤外線センサーの比較" class="card-img">
-            <div class="content">
-                <ul class="logic-list">
-                    <li><strong>非冷却型 (マイクロボロ):</strong> 温度による抵抗変化を測る。小型・長寿命。常時稼働の設備監視に最適。</li>
-                    <li><strong>冷却型 (量子型):</strong> 電子を直接叩き出す。$-200℃$付近まで冷却し、超高速・超高感度を実現。宇宙・極限環境用。</li>
-                </ul>
-            </div>
-        </div>
+    <h2 class="section-title">2. 代表的なセンサー方式の比較</h2>
+    <div class="image-box">
+        <img src="cmos.png" alt="CMOS vs CCD">
+    </div>
+    <div class="desc-text">
+        <p>現在、多くの機器で採用されているのは高速なCMOS方式です。一方で、画質の均一性を極限まで追求する用途ではCCD方式が選ばれることもあります。</p>
+        <table>
+            <tr>
+                <th>項目</th>
+                <td>CMOSセンサー（主流）</td>
+                <td>CCDセンサー（従来型）</td>
+            </tr>
+            <tr>
+                <th>読み出し原理</th>
+                <td>画素ごとに回路があり、高速に読み出す</td>
+                <td>バケツリレーのように電荷を転送し、1箇所で読み出す</td>
+            </tr>
+            <tr>
+                <th>速度</th>
+                <td style="font-weight:bold;">非常に速い</td>
+                <td>比較的遅い</td>
+            </tr>
+            <tr>
+                <th>消費電力</th>
+                <td>低い（省エネ）</td>
+                <td>高い（発熱しやすい）</td>
+            </tr>
+            <tr>
+                <th>主な用途</th>
+                <td>スマートフォン、一眼レフ、産業用カメラ</td>
+                <td>宇宙観測、医療用などの特殊用途</td>
+            </tr>
+        </table>
     </div>
 
-    <div style="background: rgba(99, 102, 241, 0.05); padding: 30px; border-radius: 16px; border: 1px dashed var(--accent-sensor); text-align: center;">
-        <h3 style="margin-top:0">Sensor Integration Strategy</h3>
-        <p style="color: var(--text-dim); max-width: 800px; margin: 0 auto;">
-            人員削減を目指すシステムにおいて、センサーは単なるカメラの部品ではない。
-            <strong>「見たい波長」と「必要な速度」</strong>に基づき、冷却器の要不要からシャッター方式までを物理レベルで整合させることで、AIが迷わない完璧な「数値」を提供することが可能になる。
-        </p>
+    <h2 class="section-title">3. 赤外線センサー：冷却型と非冷却型</h2>
+    <div class="image-box">
+        <img src="cool.png" alt="赤外線センサーの比較">
+    </div>
+    <div class="desc-text" style="border-left-color: var(--infra-color);">
+        <span class="info-tag" style="background: var(--infra-color);">熱検知のメカニズム</span>
+        <p>目に見えない「熱」を捉えるには、温度上昇を測る方法（熱型）と、光子を直接数える方法（量子型）があります。用途に応じた精度の使い分けが重要です。</p>
+        <table>
+            <tr>
+                <th class="highlight-red">種類</th>
+                <td class="highlight-red">非冷却型（マイクロボロメータ）</td>
+                <td class="highlight-red">冷却型（量子型）</td>
+            </tr>
+            <tr>
+                <th>測定原理</th>
+                <td><b>熱型：</b>赤外線による受熱体の「温度上昇」を測る</td>
+                <td><b>量子型：</b>赤外線の「光子」が電子を叩き出す現象を測る</td>
+            </tr>
+            <tr>
+                <th>冷却の有無</th>
+                <td>不要（常温で動作）</td>
+                <td style="font-weight:bold;">必要（-200℃近くまで冷やす）</td>
+            </tr>
+            <tr>
+                <th>感度・速度</th>
+                <td>中程度（反応に少し時間がかかる）</td>
+                <td style="font-weight:bold;">極めて高い（瞬時に微細な差を検知）</td>
+            </tr>
+            <tr>
+                <th>主な用途</th>
+                <td>防犯カメラ、体温計、建物診断</td>
+                <td>宇宙観測、高速移動体解析、ガス漏れ検知</td>
+            </tr>
+        </table>
     </div>
 </div>
 
