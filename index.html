@@ -230,3 +230,184 @@
 
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>実務でのセンサー選定事例 | CHRONIX</title>
+    <style>
+        /* CHRONIX 公式トーン：白背景と黒字 */
+        body {
+            font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        /* 拡大ロゴヘッダー */
+        header.site-header {
+            background: #ffffff;
+            padding: 30px 40px;
+            width: 100%;
+            box-sizing: border-box;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        header.site-header img {
+            height: 70px;
+            width: auto;
+            display: block;
+        }
+
+        /* コンテンツ容器 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* セクションタイトル：完全な黒字、ゴールドのアクセントバー */
+        .step-title {
+            color: #000000;
+            border-left: 10px solid #d4af37;
+            padding-left: 25px;
+            font-size: 42px; /* さらに巨大化 */
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            margin: 80px 0 40px;
+            line-height: 1.2;
+        }
+
+        /* 画像ボックス：ir.png */
+        .image-frame {
+            background: #000000;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            border: 1px solid #ddd;
+        }
+
+        .image-frame img {
+            width: 100%;
+            display: block;
+        }
+
+        /* 特大解説カード */
+        .selection-guide-card {
+            background: #fbfbfb;
+            padding: 50px;
+            border-radius: 20px;
+            border-left: 8px solid #0d4d4d;
+            font-size: 1.5rem; /* 特大フォント */
+            margin-bottom: 80px;
+            color: #1a1a1a;
+        }
+
+        .guide-tag {
+            display: inline-block;
+            background: #0d4d4d;
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        /* 実務選定テーブル：大型・黒字 */
+        .selection-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            background: #ffffff;
+            font-size: 1.3rem; /* テーブル内も大きく */
+            border: 2px solid #eee;
+        }
+
+        .selection-table th, .selection-table td {
+            padding: 25px;
+            text-align: left;
+            border-bottom: 2px solid #eee;
+            color: #000;
+        }
+
+        .selection-table th {
+            background-color: #f8f8f8;
+            color: #0d4d4d;
+            font-weight: bold;
+            width: 35%;
+            border-right: 2px solid #eee;
+        }
+
+        .highlight-blue {
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        @media (max-width: 768px) {
+            .step-title { font-size: 30px; }
+            .selection-guide-card { padding: 30px; font-size: 1.2rem; }
+            .selection-table { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <a href="https://nakajimakan14550.github.io/home/">
+        <img src="logo.png" alt="CHRONIX">
+    </a>
+</header>
+
+<div class="container">
+    
+    <h2 class="step-title">4. 実務でのセンサー選定事例</h2>
+
+    <div class="image-frame">
+        <img src="ir.png" alt="CMOS/赤外線センサー選定ガイド">
+    </div>
+
+    <div class="selection-guide-card">
+        <span class="guide-tag">選定戦略：目的からの逆引き</span>
+        <p>
+            「何を見たいか」という物理的目的に対して、センサーの特性を正しく合致させることが自動化の第一歩です。
+            特に、動体における<b>「歪みの除去」</b>や、目に見えない<b>「ガスの可視化」</b>は、センサー側の物理プロセスで解決すべき課題です。
+        </p>
+
+        <table class="selection-table">
+            <tr>
+                <th>対象：目的</th>
+                <td>推奨されるセンサー特性</td>
+            </tr>
+            <tr>
+                <th>高速で動くもの</th>
+                <td class="highlight-blue">グローバルシャッター (歪みゼロ)</td>
+            </tr>
+            <tr>
+                <th>見えないガスの検知</th>
+                <td class="highlight-blue">冷却型 赤外線 (量子プロセス)</td>
+            </tr>
+            <tr>
+                <th>遠くの夜の対象物</th>
+                <td class="highlight-blue">NIR強化感度 / 非冷却型赤外線</td>
+            </tr>
+            <tr>
+                <th>精密な寸法測定</th>
+                <td class="highlight-blue">モノクロ・大画素サイズ (高S/N比)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="text-align: center; color: #666; font-size: 1.1rem; border-top: 1px solid #eee; padding-top: 40px;">
+        <p>物理レイヤーで最適な「入り口」を整え、後工程の判定精度を100%へ導く。</p>
+    </div>
+
+</div>
+
+</body>
+</html>
