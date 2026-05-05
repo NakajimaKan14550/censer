@@ -3,32 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>イメージセンサーの原理と種類 | CHRONIX</title>
+    <title>イメージセンサーの原理と種類 | 波長別選定ガイド | CHRONIX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* 基本スタイル：白背景と黒字 */
+        /* --- Base System --- */
+        :root {
+            --primary-gold: #d4af37;
+            --accent-indigo: #4f46e5;
+            --accent-teal: #0d4d4d;
+            --accent-red: #dc2626;
+            --accent-orange: #c2410c;
+            --text-main: #1a1a1a;
+            --bg-light: #fbfbfb;
+            --border-color: #eaeaea;
+        }
+
         body {
             font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
             background-color: #ffffff;
-            color: #1a1a1a;
+            color: var(--text-main);
             margin: 0;
             padding: 0;
             line-height: 1.8;
+            word-break: break-all;
         }
 
-        /* ロゴヘッダー（拡大版） */
+        /* --- Header --- */
         header.site-header {
             background: #ffffff;
-            padding: 30px 40px; 
+            padding: 25px 40px;
             width: 100%;
             box-sizing: border-box;
-            border-bottom: 1px solid #eaeaea;
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 1000;
+            display: flex;
+            align-items: center;
         }
 
         header.site-header img {
-            height: 70px; /* 45pxから70pxへ大幅拡大 */
+            height: 60px;
             width: auto;
             display: block;
             transition: opacity 0.3s ease;
@@ -38,32 +53,45 @@
             opacity: 0.7;
         }
 
-        /* コンテンツコンテナ */
+        /* --- Layout --- */
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 60px 20px 100px;
+            padding: 40px 20px 100px;
         }
 
-        /* セクションタイトル：完全な黒字、ゴールドのアクセントバー */
+        section {
+            margin-bottom: 120px;
+        }
+
+        /* --- Typography & Titles --- */
         .step-title {
-            color: #000000; /* 完全に黒字に変更 */
-            border-left: 10px solid #d4af37; /* CHRONIXゴールド */
+            color: #000000;
+            border-left: 10px solid var(--primary-gold);
             padding-left: 25px;
-            font-size: 38px; /* 大型サイズ */
+            font-size: 36px;
             font-weight: 800;
-            letter-spacing: 0.05em;
-            margin: 80px 0 40px;
+            letter-spacing: 0.02em;
+            margin: 0 0 40px 0;
             line-height: 1.2;
         }
 
-        /* 画像ボックス：視認性を高める影と枠線 */
+        .master-title {
+            font-size: 46px;
+            font-weight: 900;
+            border-left: 12px solid var(--primary-gold);
+            padding-left: 30px;
+            margin-bottom: 50px;
+            line-height: 1.1;
+        }
+
+        /* --- Image Frames --- */
         .image-frame {
-            background: #000000;
+            background: #000;
             border-radius: 20px;
             overflow: hidden;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin-bottom: 35px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.12);
             border: 1px solid #ddd;
         }
 
@@ -72,844 +100,91 @@
             display: block;
         }
 
-        /* 解説テキストボックス：大型テキスト */
+        /* --- Content Boxes --- */
         .desc-box {
-            background: #fbfbfb;
+            background: var(--bg-light);
             padding: 45px;
-            border-radius: 16px;
-            border-left: 6px solid #4f46e5; /* 補色系のアクセント */
-            font-size: 1.35rem;
-            margin-bottom: 80px;
-            color: #1a1a1a;
+            border-radius: 20px;
+            border-left: 8px solid var(--accent-indigo);
+            font-size: 1.25rem;
+            margin-bottom: 40px;
         }
 
         .info-tag {
             display: inline-block;
-            background: #000000;
-            color: #ffffff;
+            background: #000;
+            color: #fff;
             padding: 6px 18px;
             border-radius: 6px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: bold;
             margin-bottom: 20px;
+            text-transform: uppercase;
         }
 
-        /* 比較テーブル：ビジネス・エンジニアリング仕様 */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 40px 0;
-            background: #ffffff;
-            font-size: 1.2rem;
-            border: 1px solid #eee;
-        }
-
-        .comparison-table th, .comparison-table td {
-            padding: 25px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-            color: #000;
-        }
-
-        .comparison-table th {
-            background-color: #f8f8f8;
-            color: #4f46e5;
-            font-weight: bold;
-            width: 35%;
-        }
-
-        .highlight-bold {
-            font-weight: bold;
-            color: #4f46e5;
-        }
-
-        @media (max-width: 768px) {
-            header.site-header { padding: 20px; }
-            header.site-header img { height: 50px; }
-            .step-title { font-size: 28px; }
-            .desc-box { padding: 30px; font-size: 1.1rem; }
-        }
-    </style>
-</head>
-<body>
-
-<header class="site-header">
-    <a href="https://nakajimakan14550.github.io/home/">
-        <img src="logo.png" alt="CHRONIX">
-    </a>
-</header>
-
-<div class="container">
-    
-    <h2 class="step-title">1. 光電変換の仕組み</h2>
-    <div class="image-frame">
-        <img src="denshi.png" alt="光電変換の仕組み">
-    </div>
-    <div class="desc-box">
-        <span class="info-tag">物理原理：光電効果</span>
-        <p>
-            イメージセンサーの各画素（フォトダイオード）は、光子を受け取ると電子を放出します。
-            この放出された電子を<b>「バケツ」</b>に溜め、その量を電圧として読み取ることで、光の強弱を正確なデジタル数値に変換します。
-            バケツが大きく、ノイズを極限まで抑え込むことが、高精度な画像認識の第一歩となります。
-        </p>
-    </div>
-
-    <h2 class="step-title">2. 代表的なセンサー方式の比較</h2>
-    <div class="image-frame">
-        <img src="cmos.png" alt="CMOS vs CCD">
-    </div>
-    <div class="desc-box">
-        <p>
-            現在、産業用カメラの主流は高速・低消費電力な<b>CMOS方式</b>です。
-            一方、画質の均一性や科学的な精密測定が求められる特殊な用途では、電荷をリレー形式で転送する<b>CCD方式</b>が依然として選ばれることもあります。
-        </p>
-        <table class="comparison-table">
-            <tr>
-                <th>項目</th>
-                <td>CMOSセンサー（主流）</td>
-                <td>CCDセンサー（従来型）</td>
-            </tr>
-            <tr>
-                <th>読み出し原理</th>
-                <td>画素ごとに回路があり、高速に読み出す</td>
-                <td>電荷をリレー形式で転送し、1箇所で増幅</td>
-            </tr>
-            <tr>
-                <th>読み出し速度</th>
-                <td class="highlight-bold">非常に速い</td>
-                <td>比較的遅い</td>
-            </tr>
-            <tr>
-                <th>消費電力</th>
-                <td>低い（省エネ）</td>
-                <td>高い（発熱しやすい）</td>
-            </tr>
-            <tr>
-                <th>主な用途</th>
-                <td>スマートフォン、一眼レフ、産業用カメラ</td>
-                <td>宇宙観測、医療用などの特殊用途</td>
-            </tr>
-        </table>
-    </div>
-
-    <h2 class="step-title">3. 赤外線センサー：冷却型と非冷却型</h2>
-    <div class="image-frame">
-        <img src="cool.png" alt="赤外線センサーの比較">
-    </div>
-    <div class="desc-box" style="border-left-color: #dc2626;">
-        <span class="info-tag" style="background: #dc2626;">熱検知のメカニズム</span>
-        <p>
-            目に見えない「熱（遠赤外線）」を捉えるには、温度上昇による抵抗変化を測る方法（熱型）と、光子を直接電子に変換する方法（量子型）があります。
-            用途に応じた精度の使い分けが重要です。
-        </p>
-        <table class="comparison-table">
-            <tr>
-                <th style="color:#dc2626;">種類</th>
-                <td style="font-weight:bold;">非冷却型（マイクロボロメータ）</td>
-                <td style="font-weight:bold;">冷却型（量子型）</td>
-            </tr>
-            <tr>
-                <th>測定原理</th>
-                <td><b>熱型：</b>赤外線による受熱体の「温度上昇」を測る</td>
-                <td><b>量子型：</b>赤外線の「光子」が電子を叩き出す</td>
-            </tr>
-            <tr>
-                <th>冷却の有無</th>
-                <td>不要（常温で動作）</td>
-                <td class="highlight-bold">必要（-200℃近くまで冷やす）</td>
-            </tr>
-            <tr>
-                <th>感度・速度</th>
-                <td>中程度（定常的な熱監視に最適）</td>
-                <td class="highlight-bold">極めて高い（瞬時に微細な差を検知）</td>
-            </tr>
-        </table>
-    </div>
-
-</div>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>実務でのセンサー選定事例 | CHRONIX</title>
-    <style>
-        /* CHRONIX 公式トーン：白背景と黒字 */
-        body {
-            font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
-            background-color: #ffffff;
-            color: #000000;
-            margin: 0;
-            padding: 0;
-            line-height: 1.8;
-        }
-
-        /* 拡大ロゴヘッダー */
-        header.site-header {
-            background: #ffffff;
-            padding: 30px 40px;
-            width: 100%;
-            box-sizing: border-box;
-            border-bottom: 1px solid #eaeaea;
-        }
-
-        header.site-header img {
-            height: 70px;
-            width: auto;
-            display: block;
-        }
-
-        /* コンテンツ容器 */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        /* セクションタイトル：完全な黒字、ゴールドのアクセントバー */
-        .step-title {
-            color: #000000;
-            border-left: 10px solid #d4af37;
-            padding-left: 25px;
-            font-size: 42px; /* さらに巨大化 */
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            margin: 80px 0 40px;
-            line-height: 1.2;
-        }
-
-        /* 画像ボックス：ir.png */
-        .image-frame {
-            background: #000000;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 40px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
-            border: 1px solid #ddd;
-        }
-
-        .image-frame img {
-            width: 100%;
-            display: block;
-        }
-
-        /* 特大解説カード */
-        .selection-guide-card {
-            background: #fbfbfb;
-            padding: 50px;
-            border-radius: 20px;
-            border-left: 8px solid #0d4d4d;
-            font-size: 1.5rem; /* 特大フォント */
-            margin-bottom: 80px;
-            color: #1a1a1a;
-        }
-
-        .guide-tag {
-            display: inline-block;
-            background: #0d4d4d;
-            color: #ffffff;
-            padding: 8px 20px;
-            border-radius: 6px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 25px;
-        }
-
-        /* 実務選定テーブル：大型・黒字 */
-        .selection-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 40px 0;
-            background: #ffffff;
-            font-size: 1.3rem; /* テーブル内も大きく */
-            border: 2px solid #eee;
-        }
-
-        .selection-table th, .selection-table td {
-            padding: 25px;
-            text-align: left;
-            border-bottom: 2px solid #eee;
-            color: #000;
-        }
-
-        .selection-table th {
-            background-color: #f8f8f8;
-            color: #0d4d4d;
-            font-weight: bold;
-            width: 35%;
-            border-right: 2px solid #eee;
-        }
-
-        .highlight-blue {
-            font-weight: bold;
-            color: #2563eb;
-        }
-
-        @media (max-width: 768px) {
-            .step-title { font-size: 30px; }
-            .selection-guide-card { padding: 30px; font-size: 1.2rem; }
-            .selection-table { font-size: 1rem; }
-        }
-    </style>
-</head>
-<body>
-
-
-
-<div class="container">
-    
-    <h2 class="step-title">4. 実務でのセンサー選定事例</h2>
-
-    <div class="image-frame">
-        <img src="ir.png" alt="CMOS/赤外線センサー選定ガイド">
-    </div>
-
-    <div class="selection-guide-card">
-        <span class="guide-tag">選定戦略：目的からの逆引き</span>
-        <p>
-            「何を見たいか」という物理的目的に対して、センサーの特性を正しく合致させることが自動化の第一歩です。
-            特に、動体における<b>「歪みの除去」</b>や、目に見えない<b>「ガスの可視化」</b>は、センサー側の物理プロセスで解決すべき課題です。
-        </p>
-
-        <table class="selection-table">
-            <tr>
-                <th>対象：目的</th>
-                <td>推奨されるセンサー特性</td>
-            </tr>
-            <tr>
-                <th>高速で動くもの</th>
-                <td class="highlight-blue">グローバルシャッター (歪みゼロ)</td>
-            </tr>
-            <tr>
-                <th>見えないガスの検知</th>
-                <td class="highlight-blue">冷却型 赤外線 (量子プロセス)</td>
-            </tr>
-            <tr>
-                <th>遠くの夜の対象物</th>
-                <td class="highlight-blue">NIR強化感度 / 非冷却型赤外線</td>
-            </tr>
-            <tr>
-                <th>精密な寸法測定</th>
-                <td class="highlight-blue">モノクロ・大画素サイズ (高S/N比)</td>
-            </tr>
-        </table>
-    </div>
-
-    <div style="text-align: center; color: #666; font-size: 1.1rem; border-top: 1px solid #eee; padding-top: 40px;">
-        <p>物理レイヤーで最適な「入り口」を整え、後工程の判定精度を100%へ導く。</p>
-    </div>
-
-</div>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>波長別：センサー構造の決定的な違い | CHRONIX</title>
-    <style>
-        /* CHRONIX 公式スタイル：白背景・黒字・ゴールド */
-        body {
-            font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
-            background-color: #ffffff;
-            color: #000000;
-            margin: 0;
-            padding: 0;
-            line-height: 1.8;
-        }
-
-        /* 拡大ロゴヘッダー */
-        header.site-header {
-            background: #ffffff;
-            padding: 30px 40px;
-            width: 100%;
-            box-sizing: border-box;
-            border-bottom: 1px solid #eaeaea;
-        }
-
-        header.site-header img {
-            height: 70px;
-            width: auto;
-            display: block;
-        }
-
-        /* コンテンツコンテナ */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        /* セクションタイトル：完全な黒字、ゴールドのアクセントバー */
-        .step-title {
-            color: #000000;
-            border-left: 10px solid #d4af37;
-            padding-left: 25px;
-            font-size: 42px;
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            margin: 80px 0 40px;
-            line-height: 1.2;
-        }
-
-        /* 画像ボックス：uv.png */
-        .image-frame {
-            background: #000000;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 40px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
-            border: 1px solid #ddd;
-        }
-
-        .image-frame img {
-            width: 100%;
-            display: block;
-        }
-
-        /* 特大解説カード */
-        .structure-card {
-            background: #fbfbfb;
-            padding: 50px;
-            border-radius: 20px;
-            border-left: 8px solid #4f46e5;
-            font-size: 1.5rem;
-            margin-bottom: 80px;
-            color: #1a1a1a;
-        }
-
-        .structure-tag {
-            display: inline-block;
-            background: #4f46e5;
-            color: #ffffff;
-            padding: 8px 20px;
-            border-radius: 6px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 25px;
-        }
-
-        /* 構造比較テーブル：大型・黒字 */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 40px 0;
-            background: #ffffff;
-            font-size: 1.3rem;
-            border: 2px solid #eee;
-        }
-
-        .comparison-table th, .comparison-table td {
-            padding: 25px;
-            text-align: left;
-            border-bottom: 2px solid #eee;
-            color: #000;
-        }
-
-        .comparison-table th {
-            background-color: #f8f8f8;
-            color: #4f46e5;
-            font-weight: bold;
-            width: 35%;
-            border-right: 2px solid #eee;
-        }
-
-        .highlight-bold {
-            font-weight: bold;
-            color: #000000;
-        }
-
-        @media (max-width: 768px) {
-            .step-title { font-size: 30px; }
-            .structure-card { padding: 30px; font-size: 1.2rem; }
-            .comparison-table { font-size: 1rem; }
-        }
-    </style>
-</head>
-<body>
-
-
-
-<div class="container">
-    
-    <h2 class="step-title">5. 波長別：センサー構造と窓材の決定的な違い</h2>
-
-    <div class="image-frame">
-        <img src="uv.png" alt="短波長センサーと赤外線センサーの構造比較">
-    </div>
-
-    <div class="structure-card">
-        <span class="structure-tag">物理レイヤーの最適化：入り口の設計</span>
-        <p>
-            センサーの基本原理は共通ですが、波長特性に合わせて<b>「窓材（カバーガラス）」</b>と<b>「受光部の向き」</b>を物理的に変更する必要があります。
-            特に、短波長（UV）を通さない普通のガラスや、赤外線を遮断する配線層を回避する設計が、判定精度の最大化に直結します。
-        </p>
-
-        <table class="comparison-table">
-            <tr>
-                <th>比較項目</th>
-                <td>短波長 (UV/X線) センサー</td>
-                <td>赤外線 (IR) センサー</td>
-            </tr>
-            <tr>
-                <th>受光方式</th>
-                <td class="highlight-bold">裏面照射型 (BSI)</td>
-                <td>表面 / 裏面照射型</td>
-            </tr>
-            <tr>
-                <th>窓（カバーガラス）</th>
-                <td class="highlight-bold">石英 / サファイア</td>
-                <td class="highlight-bold">ゲルマニウム / シリコン</td>
-            </tr>
-            <tr>
-                <th>冷却の主な目的</th>
-                <td>超微弱光の検出・ダメージ耐性</td>
-                <td>自己熱ノイズの削減</td>
-            </tr>
-            <tr>
-                <th>物理的強み</th>
-                <td>表面キズ・内部構造の可視化</td>
-                <td>温度・透過・夜間の絶対判定</td>
-            </tr>
-        </table>
-    </div>
-
-    <div style="text-align: center; color: #666; font-size: 1.1rem; border-top: 1px solid #eee; padding-top: 40px;">
-        <p>「入り口」の物理的な整合性が、AI判定のロバスト性を担保する。</p>
-    </div>
-
-</div>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>可視光からマルチスペクトルへ：物質特定への進化 | CHRONIX</title>
-    <style>
-        /* CHRONIX 公式スタイル：視認性最優先の白背景・黒字 */
-        body {
-            font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
-            background-color: #ffffff;
-            color: #000000;
-            margin: 0;
-            padding: 0;
-            line-height: 1.8;
-        }
-
-        /* 拡大ロゴヘッダー */
-        header.site-header {
-            background: #ffffff;
-            padding: 30px 40px;
-            width: 100%;
-            box-sizing: border-box;
-            border-bottom: 1px solid #eaeaea;
-        }
-
-        header.site-header img {
-            height: 70px;
-            width: auto;
-            display: block;
-        }
-
-        /* メインコンテナ */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        /* セクションタイトル：特大の黒字、ゴールドアクセント */
-        .step-title {
-            color: #000000;
-            border-left: 10px solid #d4af37;
-            padding-left: 25px;
-            font-size: 42px;
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            margin: 80px 0 40px;
-            line-height: 1.2;
-        }
-
-        /* 画像ボックス：kashi.png */
-        .image-frame {
-            background: #000000;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 40px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
-            border: 1px solid #ddd;
-        }
-
-        .image-frame img {
-            width: 100%;
-            display: block;
-        }
-
-        /* 特大解説カード */
-        .info-card {
-            background: #fbfbfb;
-            padding: 50px;
-            border-radius: 20px;
-            border-left: 8px solid #0d4d4d;
-            font-size: 1.5rem; /* 特大サイズ */
-            margin-bottom: 80px;
-            color: #1a1a1a;
-        }
-
-        .card-tag {
-            display: inline-block;
-            background: #0d4d4d;
-            color: #ffffff;
-            padding: 8px 20px;
-            border-radius: 6px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 25px;
-        }
-
-        /* 比較テーブル：大型・黒字 */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 40px 0;
-            background: #ffffff;
-            font-size: 1.3rem;
-            border: 2px solid #eee;
-        }
-
-        .data-table th, .data-table td {
-            padding: 25px;
-            text-align: left;
-            border-bottom: 2px solid #eee;
-            color: #000;
-        }
-
-        .data-table th {
-            background-color: #f8f8f8;
-            color: #0d4d4d;
-            font-weight: bold;
-            width: 35%;
-            border-right: 2px solid #eee;
-        }
-
-        .highlight-accent {
-            font-weight: bold;
-            color: #c2410c;
-        }
-
-        @media (max-width: 768px) {
-            .step-title { font-size: 30px; }
-            .info-card { padding: 30px; font-size: 1.2rem; }
-            .data-table { font-size: 1rem; }
-        }
-    </style>
-</head>
-<body>
-
-<header class="site-header">
-    <a href="https://nakajimakan14550.github.io/home/">
-        <img src="logo.png" alt="CHRONIX">
-    </a>
-</header>
-
-<div class="container">
-    
-    <h2 class="step-title">6. 可視光からマルチスペクトルへ：物質特定への進化</h2>
-
-    <div class="image-frame">
-        <img src="kashi.png" alt="可視光センサーとマルチスペクトルカメラの比較">
-    </div>
-
-    <div class="info-card">
-        <span class="card-tag">CONVERT（ステップ2）：物理特性の数値化</span>
-        <p>
-            可視光センサーは、人間の「目」をデジタル化し、見たままの世界を再現する自動化の第一歩です。しかし、人員削減を極めるDXの現場では、<b>「見た目が似ているが材質が違うもの」</b>を判別する壁に直面します。
-        </p>
-        <p>
-            そこで登場するのがマルチスペクトルカメラです。RGBの3色を超えた波長分割と近赤外線（NIR）の活用により、物質固有の「光の指紋（スペクトル）」を数値化し、人知を超えた精度での物質特定を実現します。
-        </p>
-
-        <table class="data-table">
-            <tr>
-                <th>比較項目</th>
-                <td>可視光センサー (VIS)</td>
-                <td>マルチスペクトルカメラ</td>
-            </tr>
-            <tr>
-                <th>バンド数</th>
-                <td>3 (R, G, B)</td>
-                <td class="highlight-accent">5 ～ 10バンド以上</td>
-            </tr>
-            <tr>
-                <th>主な原理</th>
-                <td>ベイヤー配列による色の再現</td>
-                <td class="highlight-accent">分光フィルタによる反射パターンの数値化</td>
-            </tr>
-            <tr>
-                <th>見えるもの</th>
-                <td>人間の目に見える範囲の色・形</td>
-                <td class="highlight-accent">物質の材質・鮮度・内部の異物</td>
-            </tr>
-            <tr>
-                <th>DXにおける価値</th>
-                <td>標準的な目視検査の自動化</td>
-                <td class="highlight-accent">誤判定ゼロの究極の無人ライン構築</td>
-            </tr>
-        </table>
-    </div>
-
-    <div style="text-align: center; color: #666; font-size: 1.1rem; border-top: 1px solid #eee; padding-top: 40px;">
-        <p>「見た目の模倣」から「物理データの解析」へ。センサーの進化がDXの質を変える。</p>
-    </div>
-
-</div>
-
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>波長別センサー選定・完全ガイド | CHRONIX</title>
-    <style>
-        /* CHRONIX 公式トーン：白背景・黒字・ゴールド */
-        body {
-            font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
-            background-color: #ffffff;
-            color: #000000;
-            margin: 0;
-            padding: 0;
-            line-height: 1.8;
-        }
-
-        /* 拡大ロゴヘッダー */
-        header.site-header {
-            background: #ffffff;
-            padding: 30px 40px;
-            width: 100%;
-            box-sizing: border-box;
-            border-bottom: 1px solid #eaeaea;
-        }
-
-        header.site-header img {
-            height: 70px;
-            width: auto;
-            display: block;
-        }
-
-        /* メinコンテナ */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        /* 総まとめタイトル：巨大黒字、ゴールドアクセント */
-        .master-title {
-            color: #000000;
-            border-left: 12px solid #d4af37;
-            padding-left: 30px;
-            font-size: 48px;
-            font-weight: 900;
-            letter-spacing: 0.05em;
-            margin: 80px 0 50px;
-            line-height: 1.1;
-        }
-
-        /* 究極の選定テーブル */
-        .master-table-wrapper {
+        /* --- Tables --- */
+        .table-wrapper {
             overflow-x: auto;
-            margin-bottom: 80px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            border-radius: 20px;
+            margin: 30px 0;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
         }
 
-        .master-table {
+        table {
             width: 100%;
             border-collapse: collapse;
-            background: #ffffff;
-            font-size: 1.25rem; /* テキスト特大 */
-            min-width: 900px;
+            background: #fff;
+            font-size: 1.15rem;
         }
 
-        .master-table th {
-            background-color: #0d4d4d;
-            color: #ffffff;
-            padding: 25px;
+        th, td {
+            padding: 22px;
             text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f8f8f8;
             font-weight: bold;
-            border: 1px solid #0d4d4d;
+            color: var(--accent-teal);
+            width: 30%;
         }
 
-        .master-table td {
-            padding: 25px;
-            border: 1px solid #eee;
-            vertical-align: top;
-            color: #1a1a1a;
+        .highlight-bold { font-weight: bold; color: var(--accent-indigo); }
+        .highlight-blue { font-weight: bold; color: #2563eb; }
+        .highlight-accent { font-weight: bold; color: var(--accent-orange); }
+
+        /* --- Master Guide Specific --- */
+        .master-table th {
+            background-color: var(--accent-teal);
+            color: #fff;
+            border: 1px solid var(--accent-teal);
         }
 
-        .master-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        /* 波長区分の強調カラー */
         .wavelength-label {
             font-weight: 900;
-            color: #000;
+            font-size: 1.3rem;
             display: block;
-            font-size: 1.4rem;
-            margin-bottom: 5px;
         }
 
-        /* 選定の黄金律カード */
-        .golden-rule-section {
-            background: #000000;
-            color: #ffffff;
-            padding: 60px;
-            border-radius: 30px;
-            margin-top: 100px;
+        /* --- Footer Note --- */
+        .footer-note {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 50px;
+            margin-top: 80px;
         }
 
-        .golden-rule-section h3 {
-            color: #d4af37;
-            font-size: 32px;
-            margin-top: 0;
-            border-bottom: 2px solid #d4af37;
-            display: inline-block;
-            margin-bottom: 40px;
-        }
-
-        .rule-item {
-            margin-bottom: 40px;
-        }
-
-        .rule-item h4 {
-            font-size: 24px;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
-
-        .rule-item p {
-            font-size: 1.4rem;
-            color: #cccccc;
-            margin: 0;
-        }
-
+        /* --- Mobile Optimization --- */
         @media (max-width: 768px) {
-            .master-title { font-size: 32px; }
-            .master-table { font-size: 1rem; }
-            .golden-rule-section { padding: 30px; }
+            header.site-header { padding: 15px 20px; }
+            header.site-header img { height: 45px; }
+            .step-title { font-size: 26px; border-left-width: 7px; }
+            .master-title { font-size: 30px; }
+            .desc-box { padding: 25px; font-size: 1.1rem; }
+            th, td { padding: 15px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -923,61 +198,271 @@
 
 <div class="container">
     
-    <h2 class="master-title">波長別：センサー選定・完全ガイド</h2>
+    <!-- Section 1 -->
+    <section>
+        <h2 class="step-title">1. 光電変換の仕組み</h2>
+        <div class="image-frame">
+            <img src="denshi.png" alt="光電変換の仕組み">
+        </div>
+        <div class="desc-box">
+            <span class="info-tag">物理原理：光電効果</span>
+            <p>
+                イメージセンサーの各画素（フォトダイオード）は、光子を受け取ると電子を放出します。
+                この放出された電子を<b>「バケツ」</b>に溜め、その量を電圧として読み取ることで、光の強弱を正確なデジタル数値に変換します。
+                バケツが大きく、ノイズを極限まで抑え込むことが、高精度な画像認識の第一歩となります。
+            </p>
+        </div>
+    </section>
 
-    <div class="master-table-wrapper">
-        <table class="master-table">
-            <thead>
-                <tr>
-                    <th style="width: 20%;">波長区分</th>
-                    <th style="width: 25%;">代表的センサー</th>
-                    <th style="width: 25%;">物理的強み</th>
-                    <th style="width: 30%;">人員削減DXでの例</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><span class="wavelength-label">短波長 (UV/X線)</span></td>
-                    <td>裏面照射型CMOS<br>FPD (X線用)</td>
-                    <td>表面の微細構造・内部透過</td>
-                    <td>透明フィルムのキズ検査<br>鋳物の内部空洞検知</td>
-                </tr>
-                <tr>
-                    <td><span class="wavelength-label">可視光 (VIS)</span></td>
-                    <td>一般CMOS (ベイヤー)</td>
-                    <td>形状・色・標準外観</td>
-                    <td>梱包状態のチェック<br>目視作業の自動化</td>
-                </tr>
-                <tr>
-                    <td><span class="wavelength-label">マルチスペクトル</span></td>
-                    <td>分光フィルタ型CMOS</td>
-                    <td>物質の特定 (光の指紋)</td>
-                    <td>樹脂と異物の100%選別<br>食品の鮮度・糖度の数値化</td>
-                </tr>
-                <tr>
-                    <td><span class="wavelength-label">近赤外 (NIR/SWIR)</span></td>
-                    <td>InGaAsセンサー</td>
-                    <td>透過・水分吸収・夜間</td>
-                    <td>基板越しの配線検査<br>不透明容器の液面判定</td>
-                </tr>
-                <tr>
-                    <td><span class="wavelength-label">遠赤外 (LWIR)</span></td>
-                    <td>マイクロボロメータ</td>
-                    <td>熱エネルギー (温度)</td>
-                    <td>軸受の異常発熱検知<br>暗闇での侵入監視</td>
-                </tr>
-                <tr>
-                    <td><span class="wavelength-label">テラヘルツ / ミリ波</span></td>
-                    <td>THz検出器 / レーダー</td>
-                    <td>遮蔽物の透過・距離</td>
-                    <td>ダンボール内の検品<br>搬送ロボの自律走行</td>
-                </tr>
-            </tbody>
-        </table>
+    <!-- Section 2 -->
+    <section>
+        <h2 class="step-title">2. 代表的なセンサー方式の比較</h2>
+        <div class="image-frame">
+            <img src="cmos.png" alt="CMOS vs CCD">
+        </div>
+        <div class="desc-box">
+            <p>
+                現在、産業用カメラの主流は高速・低消費電力な<b>CMOS方式</b>です。
+                一方、画質の均一性や科学的な精密測定が求められる特殊な用途では、電荷をリレー形式で転送する<b>CCD方式</b>が依然として選ばれることもあります。
+            </p>
+            <div class="table-wrapper">
+                <table>
+                    <tr>
+                        <th>項目</th>
+                        <td>CMOSセンサー（主流）</td>
+                        <td>CCDセンサー（従来型）</td>
+                    </tr>
+                    <tr>
+                        <th>読み出し原理</th>
+                        <td>画素ごとに回路があり、高速に読み出す</td>
+                        <td>電荷をリレー形式で転送し、1箇所で増幅</td>
+                    </tr>
+                    <tr>
+                        <th>読み出し速度</th>
+                        <td class="highlight-bold">非常に速い</td>
+                        <td>比較的遅い</td>
+                    </tr>
+                    <tr>
+                        <th>消費電力</th>
+                        <td>低い（省エネ）</td>
+                        <td>高い（発熱しやすい）</td>
+                    </tr>
+                    <tr>
+                        <th>主な用途</th>
+                        <td>スマートフォン、一眼レフ、産業用カメラ</td>
+                        <td>宇宙観測、医療用などの特殊用途</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section>
+        <h2 class="step-title">3. 赤外線センサー：冷却型と非冷却型</h2>
+        <div class="image-frame">
+            <img src="cool.png" alt="赤外線センサーの比較">
+        </div>
+        <div class="desc-box" style="border-left-color: var(--accent-red);">
+            <span class="info-tag" style="background: var(--accent-red);">熱検知のメカニズム</span>
+            <p>
+                目に見えない「熱（遠赤外線）」を捉えるには、温度上昇による抵抗変化を測る方法（熱型）と、光子を直接電子に変換する方法（量子型）があります。
+                用途に応じた精度の使い分けが重要です。
+            </p>
+            <div class="table-wrapper">
+                <table>
+                    <tr>
+                        <th style="color:var(--accent-red);">種類</th>
+                        <td style="font-weight:bold;">非冷却型（マイクロボロメータ）</td>
+                        <td style="font-weight:bold;">冷却型（量子型）</td>
+                    </tr>
+                    <tr>
+                        <th>測定原理</th>
+                        <td><b>熱型：</b>赤外線による受熱体の「温度上昇」を測る</td>
+                        <td><b>量子型：</b>赤外線の「光子」が電子を叩き出す</td>
+                    </tr>
+                    <tr>
+                        <th>冷却の有無</th>
+                        <td>不要（常温で動作）</td>
+                        <td class="highlight-bold">必要（-200℃近くまで冷やす）</td>
+                    </tr>
+                    <tr>
+                        <th>感度・速度</th>
+                        <td>中程度（定常的な熱監視に最適）</td>
+                        <td class="highlight-bold">極めて高い（瞬時に微細な差を検知）</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4 -->
+    <section>
+        <h2 class="step-title">4. 実務でのセンサー選定事例</h2>
+        <div class="image-frame">
+            <img src="ir.png" alt="CMOS/赤外線センサー選定ガイド">
+        </div>
+        <div class="desc-box" style="border-left-color: var(--accent-teal);">
+            <span class="info-tag" style="background: var(--accent-teal);">選定戦略：目的からの逆引き</span>
+            <p>
+                「何を見たいか」という物理的目的に対して、センサーの特性を正しく合致させることが自動化の第一歩です。
+                特に、動体における<b>「歪みの除去」</b>や、目に見えない<b>「ガスの可視化」</b>は、センサー側の物理プロセスで解決すべき課題です。
+            </p>
+            <div class="table-wrapper">
+                <table>
+                    <tr>
+                        <th>対象：目的</th>
+                        <td>推奨されるセンサー特性</td>
+                    </tr>
+                    <tr>
+                        <th>高速で動くもの</th>
+                        <td class="highlight-blue">グローバルシャッター (歪みゼロ)</td>
+                    </tr>
+                    <tr>
+                        <th>見えないガスの検知</th>
+                        <td class="highlight-blue">冷却型 赤外線 (量子プロセス)</td>
+                    </tr>
+                    <tr>
+                        <th>遠くの夜の対象物</th>
+                        <td class="highlight-blue">NIR強化感度 / 非冷却型赤外線</td>
+                    </tr>
+                    <tr>
+                        <th>精密な寸法測定</th>
+                        <td class="highlight-blue">モノクロ・大画素サイズ (高S/N比)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5 -->
+    <section>
+        <h2 class="step-title">5. 波長別：センサー構造と窓材の決定的な違い</h2>
+        <div class="image-frame">
+            <img src="uv.png" alt="構造比較">
+        </div>
+        <div class="desc-box">
+            <span class="info-tag">物理レイヤーの最適化：入り口の設計</span>
+            <p>
+                センサーの基本原理は共通ですが、波長特性に合わせて<b>「窓材（カバーガラス）」</b>と<b>「受光部の向き」</b>を物理的に変更する必要があります。
+                特に、短波長（UV）を通さない普通のガラスや、赤外線を遮断する配線層を回避する設計が、判定精度の最大化に直結します。
+            </p>
+            <div class="table-wrapper">
+                <table>
+                    <tr>
+                        <th>比較項目</th>
+                        <td>短波長 (UV/X線) センサー</td>
+                        <td>赤外線 (IR) センサー</td>
+                    </tr>
+                    <tr>
+                        <th>受光方式</th>
+                        <td class="highlight-bold">裏面照射型 (BSI)</td>
+                        <td>表面 / 裏面照射型</td>
+                    </tr>
+                    <tr>
+                        <th>窓（カバーガラス）</th>
+                        <td class="highlight-bold">石英 / サファイア</td>
+                        <td class="highlight-bold">ゲルマニウム / シリコン</td>
+                    </tr>
+                    <tr>
+                        <th>冷却の主な目的</th>
+                        <td>超微弱光の検出・ダメージ耐性</td>
+                        <td>自己熱ノイズの削減</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6 -->
+    <section>
+        <h2 class="step-title">6. 可視光からマルチスペクトルへ</h2>
+        <div class="image-frame">
+            <img src="kashi.png" alt="物質特定への進化">
+        </div>
+        <div class="desc-box" style="border-left-color: var(--accent-teal);">
+            <span class="info-tag" style="background: var(--accent-teal);">CONVERT：物理特性の数値化</span>
+            <p>
+                可視光センサーは標準的な目視検査の自動化を担いますが、DXの現場では<b>「見た目が似ているが材質が違うもの」</b>を判別する壁に直面します。
+                そこで、RGBの3色を超えた波長分割を行うマルチスペクトルカメラが、物質固有の「光の指紋（スペクトル）」を数値化し、人知を超えた精度での物質特定を実現します。
+            </p>
+            <div class="table-wrapper">
+                <table>
+                    <tr>
+                        <th>比較項目</th>
+                        <td>可視光センサー (VIS)</td>
+                        <td>マルチスペクトルカメラ</td>
+                    </tr>
+                    <tr>
+                        <th>バンド数</th>
+                        <td>3 (R, G, B)</td>
+                        <td class="highlight-accent">5 ～ 10バンド以上</td>
+                    </tr>
+                    <tr>
+                        <th>見えるもの</th>
+                        <td>人間の目に見える範囲の色・形</td>
+                        <td class="highlight-accent">物質の材質・鮮度・内部の異物</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Section -->
+    <section>
+        <h2 class="master-title">波長別：センサー選定・完全ガイド</h2>
+        <div class="table-wrapper" style="box-shadow: 0 20px 60px rgba(0,0,0,0.1);">
+            <table class="master-table">
+                <thead>
+                    <tr>
+                        <th>波長区分</th>
+                        <th>代表的センサー</th>
+                        <th>物理的強み</th>
+                        <th>人員削減DXでの例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="wavelength-label">短波長 (UV/X線)</span></td>
+                        <td>裏面照射型CMOS<br>FPD (X線用)</td>
+                        <td>表面の微細構造・内部透過</td>
+                        <td>透明フィルムのキズ検査<br>鋳物の内部空洞検知</td>
+                    </tr>
+                    <tr>
+                        <td><span class="wavelength-label">可視光 (VIS)</span></td>
+                        <td>一般CMOS (ベイヤー)</td>
+                        <td>形状・色・標準外観</td>
+                        <td>梱包状態のチェック<br>目視作業の自動化</td>
+                    </tr>
+                    <tr>
+                        <td><span class="wavelength-label">マルチスペクトル</span></td>
+                        <td>分光フィルタ型CMOS</td>
+                        <td>物質の特定 (光の指紋)</td>
+                        <td>樹脂と異物の100%選別<br>食品の鮮度・糖度の数値化</td>
+                    </tr>
+                    <tr>
+                        <td><span class="wavelength-label">近赤外 (NIR/SWIR)</span></td>
+                        <td>InGaAsセンサー</td>
+                        <td>透過・水分吸収・夜間</td>
+                        <td>基板越しの配線検査<br>不透明容器の液面判定</td>
+                    </tr>
+                    <tr>
+                        <td><span class="wavelength-label">遠赤外 (LWIR)</span></td>
+                        <td>マイクロボロメータ</td>
+                        <td>熱エネルギー (温度)</td>
+                        <td>軸受の異常発熱検知<br>暗闇での侵入監視</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div class="footer-note">
+        <p>「入り口」の物理的な整合性が、AI判定のロバスト性を担保する。</p>
+        <p style="font-size: 0.9rem;">&copy; CHRONIX - 物理レイヤーからのDX自動化</p>
     </div>
 
-   
-
+</div>
 
 </body>
 </html>
