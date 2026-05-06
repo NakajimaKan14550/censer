@@ -409,58 +409,83 @@
     </section>
 
     <!-- Final Section -->
-    <section>
-        <h2 class="master-title">波長別：センサー選定・完全ガイド</h2>
-        <div class="table-wrapper" style="box-shadow: 0 20px 60px rgba(0,0,0,0.1);">
-            <table class="master-table">
-                <thead>
-                    <tr>
-                        <th>波長区分</th>
-                        <th>代表的センサー</th>
-                        <th>物理的強み</th>
-                        <th>人員削減DXでの例</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="wavelength-label">短波長 (UV/X線)</span></td>
-                        <td>裏面照射型CMOS<br>FPD (X線用)</td>
-                        <td>表面の微細構造・内部透過</td>
-                        <td>透明フィルムのキズ検査<br>鋳物の内部空洞検知</td>
-                    </tr>
-                    <tr>
-                        <td><span class="wavelength-label">可視光 (VIS)</span></td>
-                        <td>一般CMOS (ベイヤー)</td>
-                        <td>形状・色・標準外観</td>
-                        <td>梱包状態のチェック<br>目視作業の自動化</td>
-                    </tr>
-                    <tr>
-                        <td><span class="wavelength-label">マルチスペクトル</span></td>
-                        <td>分光フィルタ型CMOS</td>
-                        <td>物質の特定 (光の指紋)</td>
-                        <td>樹脂と異物の100%選別<br>食品の鮮度・糖度の数値化</td>
-                    </tr>
-                    <tr>
-                        <td><span class="wavelength-label">近赤外 (NIR/SWIR)</span></td>
-                        <td>InGaAsセンサー</td>
-                        <td>透過・水分吸収・夜間</td>
-                        <td>基板越しの配線検査<br>不透明容器の液面判定</td>
-                    </tr>
-                    <tr>
-                        <td><span class="wavelength-label">遠赤外 (LWIR)</span></td>
-                        <td>マイクロボロメータ</td>
-                        <td>熱エネルギー (温度)</td>
-                        <td>軸受の異常発熱検知<br>暗闇での侵入監視</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+<!-- 再構成されたセンサー選定ガイドセクション -->
+<section style="max-width: 1000px; margin: 40px auto; font-family: 'Helvetica Neue', Arial, sans-serif;">
+    <h2 style="text-align: center; color: #1a2a3a; font-size: 1.8rem; margin-bottom: 30px; border-bottom: 2px solid #3498db; display: inline-block; padding-bottom: 10px;">
+        波長別：センサー選定・完全ガイド
+    </h2>
 
-    <div class="footer-note">
-        <p>「入り口」の物理的な整合性が、AI判定のロバスト性を担保する。</p>
-        <p style="font-size: 0.9rem;">&copy; CHRONIX - 物理レイヤーからのDX自動化</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+        
+        <!-- 短波長 -->
+        <div style="background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 4px solid #6c5ce7;">
+            <span style="background: #6c5ce7; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">短波長 (UV/X線)</span>
+            <h3 style="margin: 15px 0 10px; color: #2d3436;">裏面照射型CMOS / FPD</h3>
+            <p style="font-size: 0.9rem; color: #636e72; line-height: 1.5;">
+                <strong style="color: #6c5ce7;">選定理由：</strong> エネルギーが強く、物質を透過したり表面の微細な凹凸で散乱するため、内部構造や超微細なキズを捉えるのに適しています。
+            </p>
+            <div style="background: #f1f2f6; padding: 10px; border-radius: 8px; font-size: 0.85rem;">
+                <strong>DX活用：</strong> 透明フィルムのキズ検査、鋳物の内部空洞検知
+            </div>
+        </div>
+
+        <!-- 可視光 -->
+        <div style="background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 4px solid #00b894;">
+            <span style="background: #00b894; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">可視光 (VIS)</span>
+            <h3 style="margin: 15px 0 10px; color: #2d3436;">一般CMOS (ベイヤー)</h3>
+            <p style="font-size: 0.9rem; color: #636e72; line-height: 1.5;">
+                <strong style="color: #00b894;">選定理由：</strong> 人の目に見える情報（色・形）をそのままデータ化。既存の目視工程を、低コストかつ高速にAIへ置き換える基盤となります。
+            </p>
+            <div style="background: #f1f2f6; padding: 10px; border-radius: 8px; font-size: 0.85rem;">
+                <strong>DX活用：</strong> 梱包状態チェック、目視作業の自動化
+            </div>
+        </div>
+
+        <!-- マルチスペクトル -->
+        <div style="background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 4px solid #e17055;">
+            <span style="background: #e17055; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">マルチスペクトル</span>
+            <h3 style="margin: 15px 0 10px; color: #2d3436;">分光フィルタ型CMOS</h3>
+            <p style="font-size: 0.9rem; color: #636e72; line-height: 1.5;">
+                <strong style="color: #e17055;">選定理由：</strong> 物質固有の反射波長（光の指紋）を捉えるため、色では判別できない「材質の違い」や「成分の状態」を数値化できます。
+            </p>
+            <div style="background: #f1f2f6; padding: 10px; border-radius: 8px; font-size: 0.85rem;">
+                <strong>DX活用：</strong> 樹脂と異物の選別、食品の糖度数値化
+            </div>
+        </div>
+
+        <!-- 近赤外 -->
+        <div style="background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 4px solid #0984e3;">
+            <span style="background: #0984e3; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">近赤外 (NIR/SWIR)</span>
+            <h3 style="margin: 15px 0 10px; color: #2d3436;">InGaAsセンサー</h3>
+            <p style="font-size: 0.9rem; color: #636e72; line-height: 1.5;">
+                <strong style="color: #0984e3;">選定理由：</strong> 特定のシリコンや液体を透過する性質、または水分に吸収される性質を利用し、外観からは見えない「中身」を可視化します。
+            </p>
+            <div style="background: #f1f2f6; padding: 10px; border-radius: 8px; font-size: 0.85rem;">
+                <strong>DX活用：</strong> 基板越しの配線検査、容器の液面判定
+            </div>
+        </div>
+
+        <!-- 遠赤外 -->
+        <div style="background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 4px solid #d63031;">
+            <span style="background: #d63031; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">遠赤外 (LWIR)</span>
+            <h3 style="margin: 15px 0 10px; color: #2d3436;">マイクロボロメータ</h3>
+            <p style="font-size: 0.9rem; color: #636e72; line-height: 1.5;">
+                <strong style="color: #d63031;">選定理由：</strong> 反射光ではなく、物質自体が発する「熱」を検知。物理的な接触なしに、駆動部の摩耗や異常の予兆を捉えるのに最適です。
+            </p>
+            <div style="background: #f1f2f6; padding: 10px; border-radius: 8px; font-size: 0.85rem;">
+                <strong>DX活用：</strong> 軸受の異常発熱検知、暗闇での監視
+            </div>
+        </div>
+
     </div>
+
+    <div style="margin-top: 40px; text-align: center; padding: 20px; background: #2d3436; color: white; border-radius: 12px;">
+        <p style="margin: 0; font-weight: bold; letter-spacing: 1px;">「入り口」の物理的な整合性が、AI判定のロバスト性を担保する。</p>
+        <p style="margin: 5px 0 0; font-size: 0.8rem; opacity: 0.7;">&copy; CHRONIX - 物理レイヤーからのDX自動化</p>
+    </div>
+</section>
+
+
 
 </div>
 
