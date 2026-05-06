@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>光学設計・電磁波解析ポータル | センサー選定ガイド</title>
+    <title>光学設計・電磁波解析ポータル | CHRONIX</title>
     <style>
         :root {
             --bg-deep: #050a18;
-            --panel-bg: #16243d; /* 少し明るくしてコントラストを確保 */
+            --panel-bg: #16243d; 
             --accent-blue: #00d4ff;
             --accent-teal: #2dd4bf;
             --accent-yellow: #facc15;
-            --text-main: #ffffff; /* 完全な白に変更 */
-            --text-dim: #cfd8e3; /* 補足文字も明るめに */
+            --accent-red: #ef4444;
+            --text-main: #ffffff;
+            --text-dim: #cfd8e3;
             --border: #2a4a75;
         }
 
@@ -22,27 +23,71 @@
             color: var(--text-main);
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
+            padding: 0;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; }
+        /* 0. ナビゲーション */
+        .top-nav {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: rgba(5, 10, 24, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--accent-blue);
+            padding: 10px 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
 
+        .logo-link img { height: 40px; width: auto; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+        header {
+            text-align: center;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 60px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, var(--accent-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+        }
+
+        /* セクション共通 */
         section {
             background: var(--panel-bg);
-            border-radius: 16px;
+            border-radius: 20px;
             border: 1px solid var(--border);
-            padding: 35px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
 
         .step-title {
             font-size: 2rem;
             color: var(--accent-blue);
-            border-bottom: 2px solid var(--accent-blue);
-            padding-bottom: 15px;
             margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
+
+        .visual-frame {
+            background: #000;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 25px 0;
+            border: 1px solid var(--border);
+        }
+
+        .visual-frame img { max-width: 100%; border-radius: 8px; cursor: pointer; }
 
         .info-tag {
             display: inline-block;
@@ -51,7 +96,6 @@
             padding: 6px 16px;
             border-radius: 4px;
             font-weight: 800;
-            font-size: 0.9rem;
             margin-bottom: 20px;
         }
 
@@ -61,213 +105,213 @@
             margin: 25px 0;
         }
 
-        .desc-box p {
-            font-size: 1.1rem;
-            color: var(--text-main);
+        /* グリッド・テーブル */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
 
-        /* テーブル視認性向上 */
-        .table-wrapper { overflow-x: auto; margin: 25px 0; }
+        .card {
+            background: rgba(0,0,0,0.2);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            background: rgba(0, 0, 0, 0.3);
+            margin: 20px 0;
+            background: rgba(0,0,0,0.3);
         }
 
         th, td {
-            padding: 18px;
+            padding: 15px;
             border: 1px solid var(--border);
             text-align: left;
-            font-size: 1rem;
             color: var(--text-main);
         }
 
-        th { 
-            background: rgba(0, 212, 255, 0.15); 
-            color: var(--accent-blue); 
-            font-weight: bold;
-            width: 25%;
-        }
+        th { background: rgba(0, 212, 255, 0.15); color: var(--accent-blue); }
 
-        .highlight-bold { color: var(--accent-yellow); font-weight: bold; font-size: 1.1rem; }
-        .highlight-accent { color: var(--accent-teal); font-weight: bold; font-size: 1.1rem; }
+        .reason-text { color: var(--accent-teal); font-size: 0.95rem; display: block; margin-top: 5px; }
 
-        .reason-box {
-            font-size: 0.95rem;
-            color: var(--accent-teal); /* 理由部分は色を変えて目立たせる */
-            margin-top: 8px;
-            display: block;
-            line-height: 1.5;
-            font-weight: 500;
+        /* モーダル */
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
         }
+        #modal img { max-width: 90%; max-height: 90%; border: 2px solid var(--accent-blue); }
 
-        .master-title {
-            text-align: center;
-            font-size: 2.2rem;
-            color: #fff;
-            margin: 60px 0 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .master-table thead th {
-            background: var(--accent-blue);
-            color: #000;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-
-        .wavelength-label {
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            background: #000;
-            color: var(--accent-blue);
-            border: 1px solid var(--accent-blue);
-        }
-
-        .footer-note {
-            text-align: center;
-            padding: 60px 20px;
-            border-top: 2px solid var(--border);
-            margin-top: 80px;
-            background: rgba(0,0,0,0.2);
-        }
     </style>
 </head>
 <body>
 
-<div class="container">
+<nav class="top-nav">
+    <a href="https://nakajimakan14550.github.io/home" class="logo-link">
+        <img src="logo.png" alt="CHRONIX Logo">
+    </a>
+</nav>
 
-    <!-- Section 5 -->
+<div class="container">
+    <header>
+        <h1>光学・電磁波解析：物理層からのDX自動化</h1>
+        <p>「正解を撮る」ための技術体系。1から6までの完全ガイド</p>
+    </header>
+
+    <!-- 1. 光学領域の詳細（denji.png） -->
     <section>
-        <h2 class="step-title">5. 波長別：センサー構造と窓材の違い</h2>
-        <div class="desc-box">
-            <span class="info-tag">物理レイヤーの最適化：入り口の設計</span>
-            <p>
-                センサーの基本原理は共通ですが、波長特性に合わせて<b>「窓材」</b>と<b>「受光部の向き」</b>を物理的に最適化する必要があります。
-                ここを誤ると、信号が受光層に届く前に遮断され、DXの基盤となるデータ収集に失敗します。
-            </p>
-            
-            <div class="table-wrapper">
-                <table>
-                    <tr>
-                        <th>比較項目</th>
-                        <td>短波長 (UV/X線) センサー</td>
-                        <td>赤外線 (IR) センサー</td>
-                    </tr>
-                    <tr>
-                        <th>受光方式</th>
-                        <td>
-                            <span class="highlight-bold">裏面照射型 (BSI)</span>
-                            <span class="reason-box">【選定理由】表面の配線層での吸収を防ぎ、エネルギーの弱い短波長を直接受光層へ届けるため。</span>
-                        </td>
-                        <td>
-                            <span class="highlight-bold">表面 / 裏面照射型</span>
-                            <span class="reason-box">【選定理由】長波長は透過力があるため構造制約は少ないが、高速性や感度重視で使い分ける。</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>窓（カバーガラス）</th>
-                        <td>
-                            <span class="highlight-bold">石英 / サファイア</span>
-                            <span class="reason-box">【選定理由】普通のガラスはUV領域を吸収してしまうため、透過率の高い特殊材が必須。</span>
-                        </td>
-                        <td>
-                            <span class="highlight-bold">ゲルマニウム / シリコン</span>
-                            <span class="reason-box">【選定理由】可視光を遮断し、目的の赤外線のみを透過させるフィルター機能を兼ねる。</span>
-                        </td>
-                    </tr>
-                </table>
+        <h2 class="step-title">1. 光学領域の特性：UVから赤外まで</h2>
+        <div class="visual-frame">
+            <img src="denji.png" alt="光学スペクトル詳細" class="zoomable">
+        </div>
+        <div class="grid">
+            <div class="card" style="border-top: 4px solid var(--accent-blue);">
+                <h3 style="color:var(--accent-blue)">短波長・可視光</h3>
+                <p>表面の微細なキズ（散乱）や目視代行に。青(450nm)は微細欠陥、緑(550nm)は標準検査に最適。</p>
+            </div>
+            <div class="card" style="border-top: 4px solid var(--accent-red);">
+                <h3 style="color:var(--accent-red)">赤外 (NIR/SWIR)</h3>
+                <p>シリコンやパッケージを透過し、内部を可視化。物質の透過・吸収特性を活かした特殊検査。</p>
             </div>
         </div>
     </section>
 
-    <!-- Section 6 -->
+    <!-- 2. 理論全体図（denpa.png） -->
+    <section>
+        <h2 class="step-title">2. 電磁波の連続性：光と電波</h2>
+        <div class="visual-frame">
+            <img src="denpa.png" alt="電磁波全体図" class="zoomable">
+        </div>
+        <p>ガンマ線から電波まで、エネルギーと波長の関係を俯瞰。テラヘルツ波などの境界領域が次世代の自動化を担います。</p>
+    </section>
+
+    <!-- 3. 幾何・波面補正（詳細解説） -->
+    <section>
+        <h2 class="step-title">3. 幾何・波面補正：物理層でのエラー解決</h2>
+        <div class="grid">
+            <div class="card">
+                <h3 style="color:var(--accent-blue)">波面制御 (AO)</h3>
+                <p>空気の揺らぎやレンズの不完全さを、<b>可変形状ミラー (DM)</b> でリアルタイムに打ち消し、回折限界の鮮明度を維持します。</p>
+            </div>
+            <div class="card">
+                <h3 style="color:var(--accent-yellow)">テレセントリック (TC)</h3>
+                <p>主光線を平行化し、高さ変動による<b>視差エラー</b>を物理的に排除。撮像時点で「正しい座標」を確定させます。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 補正技術（画像：hamen.png / yugami.png） -->
+    <section>
+        <h2 class="step-title">4. 視覚的補正原理</h2>
+        <div class="grid">
+            <div class="visual-frame"><img src="hamen.png" class="zoomable"></div>
+            <div class="visual-frame"><img src="yugami.png" class="zoomable"></div>
+        </div>
+    </section>
+
+    <!-- 5. センサー構造と窓材（uv.png） -->
+    <section>
+        <h2 class="step-title">5. センサー構造と窓材の決定的な違い</h2>
+        <div class="visual-frame">
+            <img src="uv.png" alt="センサー構造" class="zoomable">
+        </div>
+        <div class="desc-box">
+            <span class="info-tag">物理レイヤーの最適化</span>
+            <table>
+                <tr>
+                    <th>項目</th>
+                    <th>短波長 (UV/X線)</th>
+                    <th>赤外線 (IR)</th>
+                </tr>
+                <tr>
+                    <td>受光方式</td>
+                    <td><b>裏面照射型 (BSI)</b><span class="reason-text">理由：配線層による光の吸収・反射を回避するため。</span></td>
+                    <td>表面 / 裏面照射型<span class="reason-text">理由：長波長は透過力があるため、構造自由度が高い。</span></td>
+                </tr>
+                <tr>
+                    <td>窓材</td>
+                    <td><b>石英 / サファイア</b><span class="reason-text">理由：一般ガラスはUVを吸収してしまうため。</span></td>
+                    <td><b>ゲルマニウム / Si</b><span class="reason-text">理由：不要な可視光を遮断し、目的波長のみを通すため。</span></td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <!-- 6. マルチスペクトル（kashi.png / マスターテーブル） -->
     <section>
         <h2 class="step-title">6. 可視光からマルチスペクトルへ</h2>
-        <div class="desc-box" style="border-left-color: var(--accent-teal);">
-            <span class="info-tag" style="background: var(--accent-teal); color: #000;">CONVERT：物理特性の数値化</span>
-            <p>
-                DXの現場では、<b>「見た目は似ているが材質が違うもの」</b>の判別が自動化の壁となります。
-                RGBの3色を超えた「光の指紋（スペクトル）」を捉えることで、人知を超えた精度での物質特定を実現します。
-            </p>
-            <div class="table-wrapper">
-                <table>
-                    <tr>
-                        <th>比較項目</th>
-                        <td>可視光センサー (VIS)</td>
-                        <td>マルチスペクトルカメラ</td>
-                    </tr>
-                    <tr>
-                        <th>技術的特徴</th>
-                        <td>
-                            <span class="highlight-accent">ベイヤー配列 (RGB)</span>
-                            <span class="reason-box">【理由】低コストで人間の視覚に近い情報を取得。形状判定や標準検査に最適。</span>
-                        </td>
-                        <td>
-                            <span class="highlight-accent">分光フィルタオンチップ</span>
-                            <span class="reason-box">【理由】1ピクセルごとに特定波長を抽出。材質固有の反射率（指紋）を即座に数値化するため。</span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+        <div class="visual-frame">
+            <img src="kashi.png" alt="マルチスペクトル" class="zoomable">
         </div>
-    </section>
+        <div class="desc-box" style="border-left-color: var(--accent-teal);">
+            <span class="info-tag" style="background: var(--accent-teal); color:#000;">材質を数値化する「光の指紋」</span>
+            <p>見た目は同じでも材質が異なるものを、反射波形の「指紋（スペクトル）」で瞬時に判別します。</p>
+        </div>
 
-    <!-- Final Section -->
-    <h2 class="master-title">波長別：センサー選定・完全ガイド</h2>
-    <div class="table-wrapper">
-        <table class="master-table">
+        <h3 class="master-title">波長別：センサー選定・完全ガイド</h3>
+        <table>
             <thead>
                 <tr>
                     <th>波長区分</th>
                     <th>代表的センサー</th>
-                    <th>なぜそれを選ぶのか（物理的理由）</th>
-                    <th>人員削減DXでの例</th>
+                    <th>物理的選定理由</th>
+                    <th>DXでの価値</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><span class="wavelength-label">短波長 (UV/X線)</span></td>
+                    <td>短波長</td>
                     <td>裏面照射型CMOS</td>
-                    <td>微細な光子の散乱を捉え、表面の極小キズを可視化するため。</td>
-                    <td>透明フィルムのキズ検査</td>
+                    <td>微細な光子散乱を捉え、表面の極小キズを可視化するため。</td>
+                    <td>透明フィルム検査</td>
                 </tr>
                 <tr>
-                    <td><span class="wavelength-label">可視光 (VIS)</span></td>
+                    <td>可視光</td>
                     <td>一般CMOS</td>
-                    <td>最も普及しており、高速処理と高解像度を両立しやすいため。</td>
-                    <td>目視作業の自動化</td>
+                    <td>普及率・解像度・速度のバランスが最高。</td>
+                    <td>目視代行・自動化</td>
                 </tr>
                 <tr>
-                    <td><span class="wavelength-label">マルチスペクトル</span></td>
+                    <td>マルチスペクトル</td>
                     <td>分光フィルタ型</td>
-                    <td>色では判別不能な「材質」を、反射スペクトルの波形で識別するため。</td>
-                    <td>樹脂と異物の100%選別</td>
+                    <td>材質固有の反射スペクトルをピクセル単位で数値化するため。</td>
+                    <td>異物混入・材質特定</td>
                 </tr>
                 <tr>
-                    <td><span class="wavelength-label">近赤外 (NIR/SWIR)</span></td>
+                    <td>近赤外</td>
                     <td>InGaAsセンサー</td>
-                    <td>シリコンでは感度がない領域の透過光（透視）を捉えるため。</td>
-                    <td>基板越しの配線検査</td>
-                </tr>
-                <tr>
-                    <td><span class="wavelength-label">遠赤外 (LWIR)</span></td>
-                    <td>マイクロボロメータ</td>
-                    <td>物体が放射する熱エネルギーを電気信号として直接捉えるため。</td>
-                    <td>軸受の異常発熱検知</td>
+                    <td>シリコンを透過する波長（1000nm超）を高感度で捉えるため。</td>
+                    <td>基板・パッケージ透視</td>
                 </tr>
             </tbody>
         </table>
-    </div>
+    </section>
 
     <div class="footer-note">
-        <h3 style="color: var(--accent-blue); font-size: 1.5rem;">「入り口」の物理的な整合性が、AI判定のロバスト性を担保する。</h3>
-        <p style="font-size: 1.1rem; color: #fff; margin-top: 20px;">&copy; CHRONIX - 物理レイヤーからのDX自動化</p>
+        <h3 style="color: var(--accent-blue);">「物理層の整合性」がAIのロバスト性を担保する。</h3>
+        <p>&copy; CHRONIX - 物理レイヤーからのDX自動化</p>
     </div>
-
 </div>
+
+<div id="modal">
+    <img id="modal-img" src="">
+</div>
+
+<script>
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    document.querySelectorAll('.zoomable').forEach(img => {
+        img.onclick = () => { modal.style.display='flex'; modalImg.src=img.src; }
+    });
+    modal.onclick = () => { modal.style.display='none'; }
+</script>
 
 </body>
 </html>
