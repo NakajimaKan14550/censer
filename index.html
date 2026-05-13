@@ -408,6 +408,84 @@
         </div>
     </section>
 
+    <section>
+        <h2 class="step-title">1. 映像データの構造と基本理論</h2>
+        <div class="desc-box">
+            <span class="info-tag" style="background: var(--primary);">THEORY：データレートの定義</span>
+            <p>
+                デジタル映像のデータ量は、解像度、フレームレート、ビット深度の積によって物理的に決定されます。
+            </p>
+            <div style="background: #f1f5f9; padding: 20px; text-align: center; font-family: serif; font-size: 1.2rem; margin: 15px 0; border-radius: 6px;">
+                データレート (bps) = 画素数 × fps × ビット深度
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="step-title">2. ターゲットスペックの分析（8K・60fps）</h2>
+        <div class="desc-box">
+            <span class="info-tag" style="background: var(--primary);">ANALYSIS：システム限界値</span>
+            <p>
+                本システムのベースとなる8K運用時の負荷を算出。14.4 Gbpsという数値が、システムが許容する最大のスループットとなります。
+            </p>
+            <div class="table-wrapper">
+                <table>
+                    <tr><th>項目</th><th>設定値</th><th>備考</th></tr>
+                    <tr><td>解像度</td><td>7280 × 4120</td><td>約30MP</td></tr>
+                    <tr><td>フレームレート</td><td>60 fps</td><td>標準の2倍速</td></tr>
+                    <tr><td>データレート</td><td class="highlight-accent">約 14.4 Gbps</td><td>システムの最大処理能力</td></tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="step-title">3. 高速カメラへの転用理論（Windowing）</h2>
+        <div class="image-frame">
+            <img src="8k.png" alt="Windowing理論">
+        </div>
+        <div class="desc-box">
+            <span class="info-tag" style="background: var(--accent);">CONVERT：等価交換原理</span>
+            <p>
+                センサーの読み出し領域を制限するWindowing技術により、解像度を下げた分だけフレームレートを高めることが可能です。
+            </p>
+            <div class="table-wrapper">
+                <table>
+                    <tr><th>解像度</th><td>1920 × 1080 (2K)</td></tr>
+                    <tr><th>理論最大速度</th><td class="highlight-accent">約 868 fps</td></tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="step-title">4. センサーに求められる「4つの重要性能」</h2>
+        <div class="desc-box" style="border-left-color: var(--accent-teal);">
+            <span class="info-tag" style="background: var(--accent-teal);">SPEC：物理的精度要件</span>
+            <ul style="margin-top: 10px; list-style: none;">
+                <li><strong>■ 検出の能力：</strong> 微弱な光を捉える感度と分解能。</li>
+                <li><strong>■ 精度・再現性：</strong> 常に一定の出力を維持する信頼性。</li>
+                <li><strong>■ 応答速度：</strong> 高速現象に遅延なく反応するレスポンス。</li>
+                <li><strong>■ 多さ（スループット）：</strong> 膨大なデータをエラーなく転送し続ける耐久力。</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="step-title">5. 実用化に向けた課題</h2>
+        <div class="desc-box" style="border-left-color: #ef4444;">
+            <span class="info-tag" style="background: #ef4444;">CHALLENGE：実装ハードル</span>
+            <p>システム実現には、データレート以外の物理的制約の克服が不可欠です。</p>
+            <div class="table-wrapper">
+                <table>
+                    <tr><th>IF</th><td>10GbE / CoaXPress等の産業用規格</td></tr>
+                    <tr><td>ストレージ</td><td>秒間1.8GB書込可能なNVMe SSD</td></tr>
+                    <tr><td>光学</td><td>高速シャッターに対応する高出力照明</td></tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
     <!-- Final Section -->
 <!-- 再構成されたセンサー選定ガイドセクション -->
 <section style="max-width: 1000px; margin: 40px auto; font-family: 'Helvetica Neue', Arial, sans-serif;">
