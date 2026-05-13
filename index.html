@@ -408,83 +408,294 @@
         </div>
     </section>
 
+    <!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8K高速撮像システム技術理論 | CHRONIX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #091a2d;
+            --accent: #f97316;
+            --accent-teal: #0d9488;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --border: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        nav {
+            background: var(--primary);
+            padding: 15px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-img { height: 40px; cursor: pointer; }
+
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .step-title {
+            color: var(--primary);
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+
+        .image-frame {
+            text-align: center;
+            margin-bottom: 30px;
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            cursor: zoom-in;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .img-zoomed {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.6);
+            z-index: 2000;
+            cursor: zoom-out;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(9, 26, 45, 0.9);
+            z-index: 1500;
+            display: none;
+        }
+
+        .desc-box {
+            border-left: 4px solid var(--accent);
+            padding-left: 20px;
+            margin-bottom: 40px;
+        }
+
+        .info-tag {
+            display: inline-block;
+            color: white;
+            padding: 2px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th { background: #f8fafc; font-weight: bold; width: 35%; }
+        .highlight-accent { color: var(--accent); font-weight: bold; }
+
+        footer {
+            background: #091a2d;
+            color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .formula-box {
+            background: #f1f5f9;
+            padding: 20px;
+            text-align: center;
+            font-family: serif;
+            font-size: 1.2rem;
+            margin: 15px 0;
+            border-radius: 6px;
+            border: 1px dashed var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 25px; }
+            .img-zoomed { transform: translate(-50%, -50%) scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="https://nakajimakan14550.github.io/home/">
+        <img src="https://nakajimakan14550.github.io/home/logo.png" alt="Logo" class="logo-img">
+    </a>
+</nav>
+
+<header>
+    <h1>8K高解像度カメラの高速運用に関する技術まとめ</h1>
+    <p style="color: #cbd5e1; margin-top: 10px;">単一の撮像プラットフォームによる解像度と速度の最適化理論</p>
+</header>
+
+<div class="overlay" id="zoomOverlay"></div>
+
+<main>
     <section>
-        <h2 class="step-title">1. 映像データの構造と基本理論</h2>
+        <h2 class="step-title">8Kカメラを高速カメラとして運用するための理論</h2>
+        
+        <div class="image-frame">
+            <img src="8k.png" alt="8K高速運用イメージ">
+        </div>
+
         <div class="desc-box">
-            <span class="info-tag" style="background: var(--primary);">THEORY：データレートの定義</span>
+            <span class="info-tag" style="background: var(--primary);">1. 映像データの構造と基本理論</span>
             <p>
-                デジタル映像のデータ量は、解像度、フレームレート、ビット深度の積によって物理的に決定されます。
+                デジタル映像のデータ量は、以下の3つの要素（解像度・フレームレート・ビット深度）の相関関係によって定義されます。
             </p>
-            <div style="background: #f1f5f9; padding: 20px; text-align: center; font-family: serif; font-size: 1.2rem; margin: 15px 0; border-radius: 6px;">
+            <div class="formula-box">
                 データレート (bps) = 画素数 × fps × ビット深度
             </div>
         </div>
-    </section>
 
-    <section>
-        <h2 class="step-title">2. ターゲットスペックの分析（8K・60fps）</h2>
         <div class="desc-box">
-            <span class="info-tag" style="background: var(--primary);">ANALYSIS：システム限界値</span>
-            <p>
-                本システムのベースとなる8K運用時の負荷を算出。14.4 Gbpsという数値が、システムが許容する最大のスループットとなります。
-            </p>
+            <span class="info-tag" style="background: var(--primary);">2. ターゲットスペックの分析（8K・60fps）</span>
+            <p>検討のベースとなる8Kカメラの負荷算出結果。14.4 Gbpsという広帯域がシステムの最大処理能力（データの蛇口）となります。</p>
             <div class="table-wrapper">
                 <table>
-                    <tr><th>項目</th><th>設定値</th><th>備考</th></tr>
-                    <tr><td>解像度</td><td>7280 × 4120</td><td>約30MP</td></tr>
-                    <tr><td>フレームレート</td><td>60 fps</td><td>標準の2倍速</td></tr>
-                    <tr><td>データレート</td><td class="highlight-accent">約 14.4 Gbps</td><td>システムの最大処理能力</td></tr>
+                    <tr><th>解像度</th><td>7280 × 4120 (約30MP)</td></tr>
+                    <tr><th>フレームレート</th><td>60 fps</td></tr>
+                    <tr><th>ビット深度</th><td>8 bit (モノクロ想定)</td></tr>
+                    <tr><th>データレート</th><td class="highlight-accent">約 14.4 Gbps</td></tr>
                 </table>
             </div>
         </div>
-    </section>
 
-    <section>
-        <h2 class="step-title">3. 高速カメラへの転用理論（Windowing）</h2>
-        <div class="image-frame">
-            <img src="8k.png" alt="Windowing理論">
-        </div>
         <div class="desc-box">
-            <span class="info-tag" style="background: var(--accent);">CONVERT：等価交換原理</span>
-            <p>
-                センサーの読み出し領域を制限するWindowing技術により、解像度を下げた分だけフレームレートを高めることが可能です。
-            </p>
+            <span class="info-tag" style="background: var(--accent);">3. 高速カメラへの転用理論（Windowing）</span>
+            <p>解像度を下げることで撮像速度を向上させる等価交換が可能です。システムの限界帯域（14.4 Gbps）を維持したまま解像度を2K（フルHD）に落とした場合の理論値は以下の通りです。</p>
             <div class="table-wrapper">
                 <table>
-                    <tr><th>解像度</th><td>1920 × 1080 (2K)</td></tr>
+                    <tr><th>解像度</th><td>1920 × 1080 (約207万画素)</td></tr>
                     <tr><th>理論最大速度</th><td class="highlight-accent">約 868 fps</td></tr>
                 </table>
             </div>
         </div>
-    </section>
 
-    <section>
-        <h2 class="step-title">4. センサーに求められる「4つの重要性能」</h2>
         <div class="desc-box" style="border-left-color: var(--accent-teal);">
-            <span class="info-tag" style="background: var(--accent-teal);">SPEC：物理的精度要件</span>
-            <ul style="margin-top: 10px; list-style: none;">
-                <li><strong>■ 検出の能力：</strong> 微弱な光を捉える感度と分解能。</li>
-                <li><strong>■ 精度・再現性：</strong> 常に一定の出力を維持する信頼性。</li>
-                <li><strong>■ 応答速度：</strong> 高速現象に遅延なく反応するレスポンス。</li>
-                <li><strong>■ 多さ（スループット）：</strong> 膨大なデータをエラーなく転送し続ける耐久力。</li>
+            <span class="info-tag" style="background: var(--accent-teal);">4. センサーに求められる「4つの重要性能」</span>
+            <p>単なるデータレートの確保だけでなく、センサーには以下の物理的精度が不可欠です。</p>
+            <ul style="margin-left: 15px; list-style: none; font-size: 0.95rem;">
+                <li><strong>■ 検出の能力（感度・分解能）：</strong> 微細な光を捉え、見分ける力。</li>
+                <li><strong>■ 精度・再現性：</strong> 常に正しく、同じ結果を出力する信頼性。</li>
+                <li><strong>■ 応答速度（レスポンス）：</strong> 高速な動きに遅延なく反応する速さ。</li>
+                <li><strong>■ 多さ（スループット）：</strong> 膨大なデータをエラーなく出し続ける耐久力。</li>
             </ul>
         </div>
-    </section>
 
-    <section>
-        <h2 class="step-title">5. 実用化に向けた課題</h2>
-        <div class="desc-box" style="border-left-color: #ef4444;">
-            <span class="info-tag" style="background: #ef4444;">CHALLENGE：実装ハードル</span>
-            <p>システム実現には、データレート以外の物理的制約の克服が不可欠です。</p>
+        <div class="desc-box" style="border-left-color: #64748b;">
+            <span class="info-tag" style="background: #64748b;">5. 実用化に向けた課題</span>
+            <p>巨大なデータストリームを受け止めるためのハードウェア構成が次の焦点となります。</p>
             <div class="table-wrapper">
                 <table>
-                    <tr><th>IF</th><td>10GbE / CoaXPress等の産業用規格</td></tr>
-                    <tr><td>ストレージ</td><td>秒間1.8GB書込可能なNVMe SSD</td></tr>
-                    <tr><td>光学</td><td>高速シャッターに対応する高出力照明</td></tr>
+                    <tr><th>インターフェース</th><td>10GbE以上の光回線 / CoaXPress等の産業用規格</td></tr>
+                    <tr><th>ストレージ</th><td>秒間1.8GB書込可能なNVMe SSD / 大容量バッファ</td></tr>
+                    <tr><th>光学条件</th><td>1.1ms以下の露出時間に対応する高出力照明</td></tr>
                 </table>
             </div>
         </div>
+
+        <p style="margin-top: 30px; font-weight: bold; text-align: right; color: var(--primary);">
+            結論：高精細30MPと1000fpsに迫る2K運用を両立する、極めて汎用性の高いシステムである。
+        </p>
     </section>
+</main>
+
+<footer>
+    <div class="footer-info">
+        <p class="company-name" style="font-size: 1.5rem; font-weight: bold; margin-bottom: 20px;">クロニクス株式会社</p>
+        <address class="footer-address" style="font-style: normal; line-height: 1.8; color: #cbd5e1;">
+            <p>〒160-0023 東京都新宿区西新宿3-2-11 新宿三井ビルディング二号館 904室</p>
+            <div class="contact-grid" style="display: flex; justify-content: center; gap: 20px; margin: 20px 0;">
+                <p><strong>TEL</strong> 03-5322-7191</p>
+                <p><strong>FAX</strong> 03-5322-7790</p>
+            </div>
+        </address>
+        <a href="mailto:sales@chronix.co.jp" class="btn-contact" style="display: inline-block; background: #f97316; color: white; padding: 12px 30px; border-radius: 5px; text-decoration: none; margin-top: 20px;">
+            <i class="fas fa-envelope" style="margin-right: 10px;"></i>メールでお問い合わせ
+        </a>
+        <p style="margin-top: 50px; font-size: 0.8rem; color: #64748b; letter-spacing: 0.05em;">
+            © 2026 CHRONIX
+        </p>
+    </div>
+</footer>
+
+<script>
+    const overlay = document.getElementById('zoomOverlay');
+    const imgs = document.querySelectorAll('img');
+    imgs.forEach(img => {
+        img.addEventListener('click', () => {
+            if (img.classList.contains('img-zoomed')) {
+                closeZoom();
+            } else {
+                img.classList.add('img-zoomed');
+                overlay.style.display = 'block';
+            }
+        });
+    });
+    overlay.addEventListener('click', closeZoom);
+    function closeZoom() {
+        imgs.forEach(img => img.classList.remove('img-zoomed'));
+        overlay.style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
 
     <!-- Final Section -->
 <!-- 再構成されたセンサー選定ガイドセクション -->
