@@ -332,6 +332,87 @@
         </div>
     </section>
 
+    <div class="desc-box" style="margin-top: 30px;">
+    <h3 style="border-bottom: 2px solid var(--accent); display: inline-block; margin-bottom: 20px;">
+        深層解説：8Kスループットと「Windowing」の物理学的背景
+    </h3>
+    
+    <p>8K（7680 × 4320）は、フルHDの16倍という圧倒的な空間解像度を持ちますが、これを「動画像」として運用する場合、シリコンデバイスの物理的限界との戦いになります。ここでは、なぜ解像度を下げると速度が上がるのか、そのメカニズムを詳解します。</p>
+
+    <div class="grid" style="margin-top: 25px;">
+        <div class="card" style="border-left-color: var(--primary);">
+            <h4 style="color: var(--primary);"><i class="fas fa-expand-arrows-alt"></i> 1. 空間サンプリングの指数関数的増大</h4>
+            <p>8K/60fpsの非圧縮データレートは約14.4Gbpsに達し、これは既存の伝送規格（12G-SDI等）の単線限界を超過します。1秒間に約3,300万画素をA/D変換し続ける処理負荷は、センサー内部のバス帯域を飽和させる主要因となります。</p>
+        </div>
+        
+        <div class="card" style="border-left-color: var(--primary);">
+            <h4 style="color: var(--primary);"><i class="fas fa-crop-alt"></i> 2. Windowingによる「速度への変換」</h4>
+            <p>センサーの「総スループット（ピクセルクロック）」は、回路設計上固定されています。Windowing（クロップ読み出し）により垂直方向のスキャンライン数を限定することで、1フレームあたりの読み出し時間を物理的に短縮し、余剰となった帯域をフレームレート（fps）へダイレクトに転換することが可能になります。</p>
+        </div>
+    </div>
+
+    
+
+    <div class="grid" style="margin-top: 20px;">
+        <div class="card" style="border-left-color: var(--primary);">
+            <h4 style="color: var(--primary);"><i class="fas fa-thermometer-high"></i> 3. 熱設計電力（TDP）の壁</h4>
+            <p>「全部盛り」のスペックが困難な最大の理由は「熱」です。高速読み出しはシリコンチップの猛烈な発熱を招き、SN比（信号対雑音比）を悪化させます。ハイスピードカメラがWindowingを採用するのは、特定領域にリソースを集中させることで、熱暴走を防ぎつつS/N特性を維持するための合理的選択です。</p>
+        </div>
+
+        <div class="card" style="border-left-color: var(--primary);">
+            <h4 style="color: var(--primary);"><i class="fas fa-wave-square"></i> 4. 量子効率とS/N比の相関</h4>
+            <p>高画素化により1画素あたりの受光面積が縮小すると、光子キャプチャ効率が低下します。10bit/12bitというビット深度を維持しつつ、ノイズフロアを抑えるためには、センサーサイズ、ピクセルピッチ、そして読み出し速度の高度なバランス制御が求められます。</p>
+        </div>
+    </div>
+
+    <div class="table-wrapper" style="margin-top: 30px;">
+        <p style="padding: 15px; background: #091a2d; color: #fff; font-weight: bold; border-radius: 4px 4px 0 0;">
+            物理スループット等価表：解像度とfpsのトレードオフ理論値
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>読み出しモード</th>
+                    <th>有効画素数</th>
+                    <th>理論最大fps</th>
+                    <th>データレート負荷（相対）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>8K Full Scan</strong></td>
+                    <td>約 33,170,000 px</td>
+                    <td>60 fps</td>
+                    <td>100% (基準)</td>
+                </tr>
+                <tr>
+                    <td><strong>4K Window (400%)</strong></td>
+                    <td>約 8,290,000 px</td>
+                    <td>240 fps</td>
+                    <td>100% (等価)</td>
+                </tr>
+                <tr>
+                    <td><strong>2K Window (1600%)</strong></td>
+                    <td>約 2,070,000 px</td>
+                    <td>960 fps</td>
+                    <td>100% (等価)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-size: 0.85rem; color: var(--text-sub); padding: 10px; background: #fff; border: 1px solid #e2e8f0; border-top: none;">
+            ※上表はピクセルクロックが一定であると仮定した理論限界です。実際には回路のオーバーヘッドにより変動します。
+        </p>
+    </div>
+
+    <div class="equation" style="background: #f1f5f9; padding: 25px; margin-top: 30px; border-radius: 8px;">
+        <p style="font-weight: bold; margin-bottom: 10px; color: var(--primary);">映像品質の物理均衡式</p>
+        $$\text{Quality} \propto \frac{\text{Resolution} \times \text{FPS} \times \text{Bit Depth}}{\text{Noise (Thermal + Circuit)}}$$
+        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-sub);">
+            最終的な映像の「ヌルヌル感」と「精細さ」は、シリコンの量子効率と排熱能力の積によって決定されます。
+        </p>
+    </div>
+</div>
+
     <section id="section5">
         <h2 class="step-title">5. 波長別：センサー選定・完全ガイド</h2>
         <div class="guide-grid">
